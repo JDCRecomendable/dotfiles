@@ -12,20 +12,20 @@ def run(flag):
     first function called when the program is run in the terminal.'''
     insertion = {
         0 : 'chromium --incognito',
-        1 : 'pcmanfm /home/jdcrecomendable/Dropbox',
+        1 : 'pcmanfm /home/username/Dropbox',
         2 : 'firefox --private-window',
         3 : 'thunderbird',
         4 : 'redshift',
-        5 : 'cd /home/jdcrecomendable/bin/tor-browser_en-US && ./start-tor-browser.desktop',
-        6 : 'cd /home/jdcrecomendable/bin/arduino-1.8.7 && ./arduino',
-        7 : 'cd /home/jdcrecomendable/bin/fritzing-0.9.3b.linux.AMD64 && ./Fritzing',
-        8 : '"/home/jdcrecomendable/bin/android-studio/bin/studio.sh" %f',
-        9 : '"/home/jdcrecomendable/Qt/Tools/QtCreator/bin/qtcreator"',
-        10: 'cd /home/jdcrecomendable/bin/etcher-electron-1.4.5-x86_64 && ./etcher-electron-1.4.5-x86_64.AppImage',
-        11: 'cd /home/jdcrecomendable/bin/SynfigStudio-1.2.2-18.09.14-linux64-286f1 && ./SynfigStudio-1.2.2-18.09.14-linux64-286f1.appimage',
-        12: 'cd /home/jdcrecomendable/bin/eagle-9.2.0 && ./run',
+        5 : 'cd /home/username/bin/tor-browser_en-US && ./start-tor-browser.desktop',
+        6 : 'cd /home/username/bin/arduino-1.8.7 && ./arduino',
+        7 : 'cd /home/username/bin/fritzing-0.9.3b.linux.AMD64 && ./Fritzing',
+        8 : '"/home/username/bin/android-studio/bin/studio.sh" %f',
+        9 : '"/home/username/Qt/Tools/QtCreator/bin/qtcreator"',
+        10: 'cd /home/username/bin/etcher-electron-1.4.5-x86_64 && sudo ./etcher-electron-1.4.5-x86_64.AppImage',
+        11: 'cd /home/username/bin/SynfigStudio-1.2.2-18.09.14-linux64-286f1 && ./SynfigStudio-1.2.2-18.09.14-linux64-286f1.appimage',
+        12: 'cd /home/username/bin/eagle-9.2.0 && ./run',
         13: 'jupyter-notebook --no-browser',
-        14: 'cd /home/jdcrecomendable/Unity-2018.2.7f1/Editor && ./Unity'
+        14: 'cd /home/username/Unity-2018.2.7f1/Editor && ./Unity'
     }
     try:
         to_run = insertion[flag]
