@@ -224,7 +224,7 @@ bindsym  $mod+Mod1+Shift+v      exec "pcmanfm /home/jdcrecomendable/Videos"
 # start-up commands (do look at /etc/xdg/autostart)
 exec xpad
 exec start-pulseaudio-x11
-exec --no-startup-id feh --bg-fill /home/jdcrecomendable/Pictures/Wallpapers/STD_T2.png
+exec --no-startup-id feh --bg-fill /home/jdcrecomendable/Pictures/Wallpapers/Standard\ Stone\ -\ Laptop.png
 exec --no-startup-id xscreensaver -no-splash
 exec --no-startup-id xiccd
 exec --no-startup-id displaycal-apply-profiles
