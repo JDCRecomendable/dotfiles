@@ -2,7 +2,7 @@
 
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2018 Jared Daniel Carbonell Recomendable. All rights reserved.
+# Copyright (c) 2018-2019 Jared Daniel Carbonell Recomendable. All rights reserved.
 
 import os
 import getpass
@@ -43,7 +43,7 @@ def auto_nav(string, count):
 
 def prep_str(flag, nav_flag=-1):
     '''Prepare the string to pass into the bash shell later to open the
-    appropriate directory in Nautilus.'''
+    appropriate directory in PCManFM.'''
     # Administrative Activities
     string = '/home/{}/Dropbox/'.format(get_username())
     os.chdir(string)
@@ -60,17 +60,27 @@ def prep_str(flag, nav_flag=-1):
         if flag in (0, 3):
             string = auto_nav(string, 3)
 
-    # Deal with YIJC 2018 Contents
+    # Deal with YIJC Contents
     else:
-        string += 'YIJC/2018/'
+        if 0 <= nav_flag <= 7:
+            string += 'YIJC/2018/'
+        else:
+            string += 'YIJC/2019/'
         subject_directory = {
-            0: '0ADMIN/',
-            1: '1GP/',
-            3: '3MA/',
-            4: '4PH/',
-            5: '5CP/',
-            6: '6EC/',
-            7: '7CCA/'
+            0 : '0ADMIN/',
+            1 : '1GP/',
+            3 : '3MA/',
+            4 : '4PH/',
+            5 : '5CP/',
+            6 : '6EC/',
+            7 : '7CCA/',
+            8 : '0ADMIN/',
+            9 : '1GP/',
+            10: '2MA/',
+            11: '3PH/',
+            12: '4CP/',
+            13: '5EC/',
+            14: '6CCA/'
         }
         if nav_flag == 2:
             string += '2PW/'
@@ -90,7 +100,7 @@ def run(flag, nav_flag=-1):
     user's entered arguments. This is the first function called when the program
     is run in the terminal.'''
     result = prep_str(flag, nav_flag)
-    to_run = 'nautilus {}'.format(result)
+    to_run = 'pcmanfm {}'.format(result)
     subprocess.run(['bash', '-c', to_run])
 
 def show_help():
@@ -113,7 +123,15 @@ Directories (can be called when -n flag is passed into the program):
   18ph            go to the latest directory in ~/Dropbox/YIJC/2018/4PH
   18cp            go to the latest directory in ~/Dropbox/YIJC/2018/5CP
   18ec            go to the latest directory in ~/Dropbox/YIJC/2018/6EC
-  18cca           go to the latest directory in ~/Dropbox/YIJC/2018/7CCA'''
+  18cca           go to the latest directory in ~/Dropbox/YIJC/2018/7CCA
+  19admin         go to the latest directory in ~/Dropbox/YIJC/2019/0ADMIN
+  19gp            go to the latest directory in ~/Dropbox/YIJC/2019/1GP
+  19ma            go to the latest directory in ~/Dropbox/YIJC/2019/2MA
+  19ph            go to the latest directory in ~/Dropbox/YIJC/2019/3PH
+  19cp            go to the latest directory in ~/Dropbox/YIJC/2019/4CP
+  19ec            go to the latest directory in ~/Dropbox/YIJC/2019/5EC
+  19cca           go to the latest directory in ~/Dropbox/YIJC/2019/6CCA
+'''
     print(help_doc)
 
 if __name__ == '__main__':
@@ -143,7 +161,14 @@ if __name__ == '__main__':
                 '18ph'   : 4,
                 '18cp'   : 5,
                 '18ec'   : 6,
-                '18cca'  : 7
+                '18cca'  : 7,
+                '19admin': 8,
+                '19gp'   : 9,
+                '19ma'   : 10,
+                '19ph'   : 11,
+                '19cp'   : 12,
+                '19ec'   : 13,
+                '19cca'  : 14
             }
             try:
                 run_nav_flag = nav_options[sys.argv[2]]
