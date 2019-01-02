@@ -43,7 +43,7 @@ def auto_nav(string, count):
 
 def prep_str(flag, nav_flag=-1):
     '''Prepare the string to pass into the bash shell later to open the
-    appropriate directory in PCManFM.'''
+    appropriate directory in Nautilus.'''
     # Administrative Activities
     string = '/home/{}/Dropbox/'.format(get_username())
     os.chdir(string)
@@ -100,7 +100,7 @@ def run(flag, nav_flag=-1):
     user's entered arguments. This is the first function called when the program
     is run in the terminal.'''
     result = prep_str(flag, nav_flag)
-    to_run = 'pcmanfm {}'.format(result)
+    to_run = 'nautilus {}'.format(result)
     subprocess.run(['bash', '-c', to_run])
 
 def show_help():
@@ -130,8 +130,7 @@ Directories (can be called when -n flag is passed into the program):
   19ph            go to the latest directory in ~/Dropbox/YIJC/2019/3PH
   19cp            go to the latest directory in ~/Dropbox/YIJC/2019/4CP
   19ec            go to the latest directory in ~/Dropbox/YIJC/2019/5EC
-  19cca           go to the latest directory in ~/Dropbox/YIJC/2019/6CCA
-'''
+  19cca           go to the latest directory in ~/Dropbox/YIJC/2019/6CCA'''
     print(help_doc)
 
 if __name__ == '__main__':

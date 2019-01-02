@@ -130,8 +130,7 @@ Directories (can be called when -n flag is passed into the program):
   19ph            go to the latest directory in ~/Dropbox/YIJC/2019/3PH
   19cp            go to the latest directory in ~/Dropbox/YIJC/2019/4CP
   19ec            go to the latest directory in ~/Dropbox/YIJC/2019/5EC
-  19cca           go to the latest directory in ~/Dropbox/YIJC/2019/6CCA
-'''
+  19cca           go to the latest directory in ~/Dropbox/YIJC/2019/6CCA'''
     print(help_doc)
 
 if __name__ == '__main__':
