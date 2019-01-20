@@ -140,7 +140,10 @@ if __name__ == '__main__':
         start_index = 1
         name_append = ''
         end_index = len(sys.argv) - 1
-        if sys.argv[1] in ('-p', '--previous-day'):
+        if sys.argv[1] in ('-h', '--help'):
+            show_help()
+            sys.exit(0)
+        elif sys.argv[1] in ('-p', '--previous-day'):
             variant = 1
             start_index += 1
         elif sys.argv[1] in ('-n', '--next-day'):
