@@ -12,14 +12,15 @@ dirs = sorted(os.listdir())
 
 def dir_exists(string):
     """Check if a directory in the current working directory has a similar name
-    as the input string."""
+    as the input string.
+    """
     for dir in dirs:
         if string in dir:
             return True
     return False
 
 def is_leap(year):
-    '''Return True if leap year, else False.'''
+    """Return True if leap year, else False."""
     year = int(year)
     if year % 4 != 0:
         return False
@@ -33,7 +34,7 @@ def is_leap(year):
             return True
 
 def make_template(variant=0):
-    '''Return a date string in the form of "YYMMDD_".'''
+    """Return a date string in the form of "YYMMDD_"."""
     datetime_now = datetime.now()
     yy = str(datetime_now.year)
     mm = str(datetime_now.month)
@@ -81,8 +82,9 @@ def make_template(variant=0):
     return yy+mm+dd+'_'
 
 def new_name(variant=0):
-    '''Return the proposed name of the directory in the form of "YYMMDD_NN",
-    where NN refers to the serial number of the directory.'''
+    """Return the proposed name of the directory in the form of "YYMMDD_NN",
+    where NN refers to the serial number of the directory.
+    """
     template = make_template(variant)
     for i in range(1,10):
         if not(dir_exists(template+'0'+str(i))):
@@ -92,45 +94,59 @@ def new_name(variant=0):
             return template+str(i)
     return template+'99'
 
-def make_folder(variant=0):
-    '''Make the directory in the current working directory. This is the
-    function that does the intended process of the program.'''
+def make_folder(variant=0, name_append=''):
+    """Make the directory in the current working directory. This is the
+    function that does the intended process of the program.
+    """
     try:
         name = new_name(variant)
+        name_append = name_append.strip()
+        if len(name_append) > 0:
+            name = '{} \'{}\''.format(name, name_append)
         os.mkdir(name)
         return 0, name
     except FileExistsError:
-        return 1, 'Maximum number of directories for the day reached. You worked too hard. Go home, in the park.'
+        return 1, 'Maximum number of directories for the day reached. You \
+worked too hard. Go home to the park.'
 
-def run(variant=0):
-    '''Carry out the process of making a directory in the current working
+def run(variant=0, name_append=''):
+    """Carry out the process of making a directory in the current working
     directory. This is the first function called when the program is run in the
-    terminal.'''
-    n = make_folder(variant)
+    terminal.
+    """
+    n = make_folder(variant, name_append)
     if n[0] == 0:
         print('Directory with the name {} successfully created.'.format(n[1]))
     else:
         print(n[1])
 
 def show_help():
-    '''Show the help documentation for the program.'''
-    help_doc = '''Usage: mkdird [options]
+    """Show the help documentation for the program."""
+    help_doc = '''Usage: mkdird [options] [directory name]
 
 Options:
   -h, --help          show this help message and exit
-  -p, --previous-day  same as calling the function, but the date is set to the previous day
-  -n, --next-day      same as calling the function, but the date is set to the next day'''
+  -p, --previous-day  same as calling the function, but the date is set to the \
+previous day
+  -n, --next-day      same as calling the function, but the date is set to the \
+next day'''
     print(help_doc)
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         run()
-    elif len(sys.argv) == 2:
-        if sys.argv[1] in ('-p', '--previous-day'):
-            run(1)
-        elif sys.argv[1] in ('-n', '--next-day'):
-            run(2)
-        else:
-            show_help()
     else:
-        show_help()
+        variant = 0
+        start_index = 1
+        name_append = ''
+        end_index = len(sys.argv) - 1
+        if sys.argv[1] in ('-p', '--previous-day'):
+            variant = 1
+            start_index += 1
+        elif sys.argv[1] in ('-n', '--next-day'):
+            variant = 2
+            start_index += 1
+        while start_index <= end_index:
+            name_append += sys.argv[start_index] + ' '
+            start_index += 1
+        run(variant, name_append)
