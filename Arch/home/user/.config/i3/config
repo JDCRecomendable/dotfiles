@@ -208,6 +208,7 @@ bindsym  $mod+F4                exec "shutdown -h now"
 bindsym  $mod+F5                exec "shutdown -r now"
 bindsym  Print                  exec "gnome-screenshot"
 bindsym  $mod+x                 exec "gnome-screenshot -i"
+bindsym  $mod+Shift+x           exec "simplescreenrecorder"
 
 # user-specified directory-opening key bindings
 bindsym  $mod+Mod1+d            exec "launch dropbox"
