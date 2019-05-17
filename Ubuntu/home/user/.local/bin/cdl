@@ -43,7 +43,7 @@ def auto_nav(string, count):
 
 def prep_str(flag, nav_flag=-1):
     '''Prepare the string to pass into the bash shell later to open the
-    appropriate directory in Nautilus.'''
+    appropriate directory in PCManFM.'''
     # Administrative Activities
     string = '/home/{}/Dropbox/'.format(get_username())
     os.chdir(string)
@@ -52,7 +52,7 @@ def prep_str(flag, nav_flag=-1):
     if flag != 2:
         category_directory = {
             0: 'HOME/',
-            1: 'YIJC/',
+            1: 'AVCOL/',
             3: 'Projects/',
             4: 'Media/'
         }
@@ -60,33 +60,18 @@ def prep_str(flag, nav_flag=-1):
         if flag in (0, 3):
             string = auto_nav(string, 3)
 
-    # Deal with YIJC Contents
+    # Deal with AVCOL Contents
     else:
-        if 0 <= nav_flag <= 7:
-            string += 'YIJC/2018/'
-        else:
-            string += 'YIJC/2019/'
+        string += 'AVCOL/2019/'
         subject_directory = {
-            0 : '0ADMIN/',
-            1 : '1GP/',
-            3 : '3MA/',
-            4 : '4PH/',
-            5 : '5CP/',
-            6 : '6EC/',
-            7 : '7CCA/',
-            8 : '0ADMIN/',
-            9 : '1GP/',
-            10: '2MA/',
-            11: '3PH/',
-            12: '4CP/',
-            13: '5EC/',
-            14: '6CCA/'
+            0: '13ENC/',
+            1: '13MAS/',
+            2: '13MAT/',
+            3: '13PHY/',
+            4: '13TPI/'
         }
-        if nav_flag == 2:
-            string += '2PW/'
-        else:
-            string += subject_directory[nav_flag]
-            string = auto_nav(string, 3)
+        string += subject_directory[nav_flag]
+        string = auto_nav(string, 3)
 
     # Assist Bash in recognising special symbols
     symbol_fix = (' ', "'", '"', '(', '[', '{', '<', ')', ']', '}', '>', '&')
@@ -100,7 +85,7 @@ def run(flag, nav_flag=-1):
     user's entered arguments. This is the first function called when the program
     is run in the terminal.'''
     result = prep_str(flag, nav_flag)
-    to_run = 'nautilus {}'.format(result)
+    to_run = 'pcmanfm {}'.format(result)
     subprocess.run(['bash', '-c', to_run])
 
 def show_help():
@@ -112,25 +97,15 @@ Options:
   -H, --home      go to the latest directory in ~/Dropbox/HOME/
   -M, --media     go to ~/Dropbox/Media/
   -P, --projects  go to the latest directory in ~/Dropbox/Projects/
-  -Y, --yijc      go to ~/Dropbox/YIJC/
-  -n, --nav       based on the given directories flag, go to the latest respective directory in ~/Dropbox/YIJC/
+  -A, --avcol     go to ~/Dropbox/AVCOL/
+  -n, --nav       based on the given directories flag, go to the latest respective directory in ~/Dropbox/AVCOL/
 
 Directories (can be called when -n flag is passed into the program):
-  18admin         go to the latest directory in ~/Dropbox/YIJC/2018/0ADMIN
-  18gp            go to the latest directory in ~/Dropbox/YIJC/2018/1GP
-  18pw            go to the latest directory in ~/Dropbox/YIJC/2018/2PW
-  18ma            go to the latest directory in ~/Dropbox/YIJC/2018/3MA
-  18ph            go to the latest directory in ~/Dropbox/YIJC/2018/4PH
-  18cp            go to the latest directory in ~/Dropbox/YIJC/2018/5CP
-  18ec            go to the latest directory in ~/Dropbox/YIJC/2018/6EC
-  18cca           go to the latest directory in ~/Dropbox/YIJC/2018/7CCA
-  19admin         go to the latest directory in ~/Dropbox/YIJC/2019/0ADMIN
-  19gp            go to the latest directory in ~/Dropbox/YIJC/2019/1GP
-  19ma            go to the latest directory in ~/Dropbox/YIJC/2019/2MA
-  19ph            go to the latest directory in ~/Dropbox/YIJC/2019/3PH
-  19cp            go to the latest directory in ~/Dropbox/YIJC/2019/4CP
-  19ec            go to the latest directory in ~/Dropbox/YIJC/2019/5EC
-  19cca           go to the latest directory in ~/Dropbox/YIJC/2019/6CCA'''
+  enc             go to the latest directory in ~/Dropbox/AVCOL/2019/13ENC
+  mas             go to the latest directory in ~/Dropbox/AVCOL/2019/13MAS
+  mat             go to the latest directory in ~/Dropbox/AVCOL/2019/13MAT
+  phy             go to the latest directory in ~/Dropbox/AVCOL/2019/13PHY
+  tpi             go to the latest directory in ~/Dropbox/AVCOL/2019/13TPI'''
     print(help_doc)
 
 if __name__ == '__main__':
@@ -138,8 +113,8 @@ if __name__ == '__main__':
         options = {
             '-H'        : 0,
             '--home'    : 0,
-            '-Y'        : 1,
-            '--yijc'    : 1,
+            '-A'        : 1,
+            '--avcol'   : 1,
             '-P'        : 3,
             '--projects': 3,
             '-M'        : 4,
@@ -153,21 +128,11 @@ if __name__ == '__main__':
     elif len(sys.argv) == 3:
         if sys.argv[1] in ('-n', '--nav'):
             nav_options = {
-                '18admin': 0,
-                '18gp'   : 1,
-                '18pw'   : 2,
-                '18ma'   : 3,
-                '18ph'   : 4,
-                '18cp'   : 5,
-                '18ec'   : 6,
-                '18cca'  : 7,
-                '19admin': 8,
-                '19gp'   : 9,
-                '19ma'   : 10,
-                '19ph'   : 11,
-                '19cp'   : 12,
-                '19ec'   : 13,
-                '19cca'  : 14
+                'enc': 0,
+                'mas': 1,
+                'mat': 2,
+                'phy': 3,
+                'tpi': 4
             }
             try:
                 run_nav_flag = nav_options[sys.argv[2]]
