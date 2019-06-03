@@ -1,0 +1,145 @@
+#!/usr/local/bin/python3
+
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2018-2019 Jared Daniel Carbonell Recomendable. All rights reserved.
+
+import os
+import getpass
+import sys
+import subprocess
+
+def get_username():
+    '''Return the username of the currently logged in user.'''
+    return getpass.getuser()
+
+def list_dir():
+    '''Return a sorted list of directories in the current working directory.'''
+    return sorted(os.listdir())
+
+def assist_bash(string, symbol):
+    '''Assist Bash to recognise the input symbol.'''
+    new_string = string.split(symbol)
+    string = ''
+    if len(new_string) == 1:
+        string = new_string[0]
+    else:
+        for i in range(len(new_string)):
+            if i == len(new_string) - 1:
+                string += new_string[i]
+            else:
+                string += new_string[i] + '\\{}'.format(symbol)
+    return string
+
+def auto_nav(string, count):
+    '''Automagically navigate to the latest folder in Dropbox, without
+    assisting Bash.'''
+    os.chdir(string)
+    while count > 0:
+        string += str(list_dir()[-1]) + '/'
+        os.chdir(string)
+        count -= 1
+    return string
+
+def prep_str(flag, nav_flag=-1):
+    '''Prepare the string to pass into the bash shell later to open the
+    appropriate directory in Finder.'''
+    # Administrative Activities
+    string = '/Users/{}/Dropbox/'.format(get_username())
+    os.chdir(string)
+
+    # Deal with General Contents
+    if flag != 2:
+        category_directory = {
+            0: 'HOME/',
+            1: 'AVCOL/',
+            3: 'Projects/',
+            4: 'Media/'
+        }
+        string += category_directory[flag]
+        if flag in (0, 3):
+            string = auto_nav(string, 3)
+
+    # Deal with AVCOL Contents
+    else:
+        string += 'AVCOL/2019/'
+        subject_directory = {
+            0: '13ENC/',
+            1: '13MAS/',
+            2: '13MAT/',
+            3: '13PHY/',
+            4: '13TPI/'
+        }
+        string += subject_directory[nav_flag]
+        string = auto_nav(string, 3)
+
+    # Assist Bash in recognising special symbols
+    symbol_fix = (' ', "'", '"', '(', '[', '{', '<', ')', ']', '}', '>', '&')
+    for symbol in symbol_fix:
+        string = assist_bash(string, symbol)
+
+    return string
+
+def run(flag, nav_flag=-1):
+    '''Carry out the process of navigating to the latest directory based on
+    user's entered arguments. This is the first function called when the program
+    is run in the terminal.'''
+    result = prep_str(flag, nav_flag)
+    to_run = 'open {}'.format(result)
+    subprocess.run(['bash', '-c', to_run])
+
+def show_help():
+    '''Show the help documentation for the program.'''
+    help_doc = '''Usage: cdl [options] [directories]
+
+Options:
+  -h, --help      show this help message and exit
+  -H, --home      go to the latest directory in ~/Dropbox/HOME/
+  -M, --media     go to ~/Dropbox/Media/
+  -P, --projects  go to the latest directory in ~/Dropbox/Projects/
+  -A, --avcol     go to ~/Dropbox/AVCOL/
+  -n, --nav       based on the given directories flag, go to the latest respective directory in ~/Dropbox/AVCOL/
+
+Directories (can be called when -n flag is passed into the program):
+  enc             go to the latest directory in ~/Dropbox/AVCOL/2019/13ENC
+  mas             go to the latest directory in ~/Dropbox/AVCOL/2019/13MAS
+  mat             go to the latest directory in ~/Dropbox/AVCOL/2019/13MAT
+  phy             go to the latest directory in ~/Dropbox/AVCOL/2019/13PHY
+  tpi             go to the latest directory in ~/Dropbox/AVCOL/2019/13TPI'''
+    print(help_doc)
+
+if __name__ == '__main__':
+    if len(sys.argv) == 2:
+        options = {
+            '-H'        : 0,
+            '--home'    : 0,
+            '-A'        : 1,
+            '--avcol'   : 1,
+            '-P'        : 3,
+            '--projects': 3,
+            '-M'        : 4,
+            '--media'   : 4
+        }
+        try:
+            run_flag = options[sys.argv[1]]
+            run(run_flag)
+        except:
+            show_help()
+    elif len(sys.argv) == 3:
+        if sys.argv[1] in ('-n', '--nav'):
+            nav_options = {
+                'enc': 0,
+                'mas': 1,
+                'mat': 2,
+                'phy': 3,
+                'tpi': 4
+            }
+            try:
+                run_nav_flag = nav_options[sys.argv[2]]
+                run(2, run_nav_flag)
+            except:
+                show_help()
+        else:
+            show_help()
+    else:
+        show_help()
