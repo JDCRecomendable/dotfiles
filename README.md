@@ -29,7 +29,7 @@ Tools and config scripts here aim to facilitate increased productivity as well a
     * volume
 * macOS
   * /Users/user/
-    * .config/ranger
+    * .config/ranger/
       * rc.conf
     * .local/bin/
       * cdl
