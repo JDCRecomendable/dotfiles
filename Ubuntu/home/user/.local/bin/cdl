@@ -68,7 +68,8 @@ def prep_str(flag, nav_flag=-1):
             1: '13MAS/',
             2: '13MAT/',
             3: '13PHY/',
-            4: '13TPI/'
+            4: '13TPI/',
+            5: 'ADMIN/'
         }
         string += subject_directory[nav_flag]
         string = auto_nav(string, 3)
@@ -105,7 +106,8 @@ Directories (can be called when -n flag is passed into the program):
   mas             go to the latest directory in ~/Dropbox/AVCOL/2019/13MAS
   mat             go to the latest directory in ~/Dropbox/AVCOL/2019/13MAT
   phy             go to the latest directory in ~/Dropbox/AVCOL/2019/13PHY
-  tpi             go to the latest directory in ~/Dropbox/AVCOL/2019/13TPI'''
+  tpi             go to the latest directory in ~/Dropbox/AVCOL/2019/13TPI
+  admin           go to the latest directory in ~/Dropbox/AVCOL/2019/ADMIN'''
     print(help_doc)
 
 if __name__ == '__main__':
@@ -128,11 +130,12 @@ if __name__ == '__main__':
     elif len(sys.argv) == 3:
         if sys.argv[1] in ('-n', '--nav'):
             nav_options = {
-                'enc': 0,
-                'mas': 1,
-                'mat': 2,
-                'phy': 3,
-                'tpi': 4
+                'enc'  : 0,
+                'mas'  : 1,
+                'mat'  : 2,
+                'phy'  : 3,
+                'tpi'  : 4,
+                'admin': 5
             }
             try:
                 run_nav_flag = nav_options[sys.argv[2]]

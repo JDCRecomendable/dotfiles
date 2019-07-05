@@ -130,11 +130,11 @@ if __name__ == '__main__':
     elif len(sys.argv) == 3:
         if sys.argv[1] in ('-n', '--nav'):
             nav_options = {
-                'enc':   0,
-                'mas':   1,
-                'mat':   2,
-                'phy':   3,
-                'tpi':   4,
+                'enc'  : 0,
+                'mas'  : 1,
+                'mat'  : 2,
+                'phy'  : 3,
+                'tpi'  : 4,
                 'admin': 5
             }
             try:
