@@ -187,10 +187,12 @@ bar {
 
 # user-specified application-launching key bindings
 bindsym $mod+z           exec "leafpad"
+bindsym $mod+Shift+z     exec "atom"
 bindsym $mod+slash       exec "firefox --private-window"
 bindsym $mod+Shift+slash exec "chromium --incognito"
 bindsym $mod+backslash   exec "pcmanfm"
 bindsym $mod+o           exec "libreoffice"
+bindsym $mod+Shift+o     exec "texworks"
 
 # user-specified key bindings for system tasks
 bindsym $mod+l           exec "xscreensaver-command -lock"
