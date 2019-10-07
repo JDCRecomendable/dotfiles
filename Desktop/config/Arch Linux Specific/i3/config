@@ -57,7 +57,7 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # select windows using rofi
-bindsym $mod+Shift+d exec rofi -show window
+bindsym $mod+Tab exec rofi -show window
 
 # change focus
 #bindsym $mod+j focus left
