@@ -1,0 +1,79 @@
+#!/usr/bin/python3
+
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2018 Jared Daniel Carbonell Recomendable. All rights reserved.
+
+# Use visudo to exclude this utility from requiring user/root passwords when
+# running with sudo.
+
+import sys
+import subprocess
+
+# This is all that has to be changed when porting this program to other computers.
+bri_change = 375
+driver_protocol = "intel_backlight"
+
+# Default Commands and Error Messages
+max_bri = int(subprocess.check_output('cat /sys/class/backlight/{p}/max_brightness'.format(p=driver_protocol), shell=True).decode())
+readcom = 'cat'
+com = 'tee /sys/class/backlight/{p}/brightness <<< {s}'
+com2 = 'cat /sys/class/backlight/{p}/brightness'
+invalid_resp = '\nYou have entered an invalid response.\nExiting...\n'
+cannot_get_brightness = '\nUnable to get brightness.\nExiting...\n'
+
+def run(has_input, level=max_bri):
+    """Carry out the process of changing the brightness of the display."""
+    if has_input == 1:
+        to_run = com.format(p=driver_protocol, s=level)
+        subprocess.run(['bash', '-c', to_run])
+    elif has_input == 2:
+        current_brightness = int(subprocess.check_output(com2.format(p=driver_protocol), shell=True).decode().split('\n')[0])
+        if level == 'd':
+            level = max(current_brightness - bri_change, 0)
+        else:
+            level = min(current_brightness + bri_change, max_bri)
+        run(1, level)
+    else:
+        temp_level = input('Brightness Level [0-{m}, Default: {m}]: '.format(m=max_bri))
+        if temp_level == '':
+            run(1)
+        elif temp_level.isnumeric():
+            if 0 <= int(temp_level) <= max_bri:
+                run(1, temp_level)
+            else:
+                sys.exit(invalid_resp)
+        else:
+            sys.exit(invalid_resp)
+
+def show_help():
+    """Show the help documentation for the program."""
+    help_doc = '''Usage: brightness [level/change]
+
+Level:
+  0    - lowest
+  [...]
+  {m} - highest
+
+Change:
+  u/up   - Increases the screen brightness by one level.
+  d/down - Decreases the screen brightness by one level.'''.format(m=max_bri)
+    print(help_doc)
+
+if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        run(0)
+    elif len(sys.argv) == 2:
+        if sys.argv[1].isnumeric():
+            if 0 <= int(sys.argv[1]) <= max_bri:
+                level = sys.argv[1]
+                run(1, level)
+            else:
+                show_help()
+        elif sys.argv[1] in ('d', 'u', 'down', 'up'):
+            level = sys.argv[1][0]
+            run(2, level)
+        else:
+            show_help()
+    else:
+        show_help()
