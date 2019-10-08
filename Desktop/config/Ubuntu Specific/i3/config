@@ -176,7 +176,7 @@ bar {
 }
 
 # user-specified application-launching key bindings
-bindsym $mod+z           exec "gedit"
+bindsym $mod+z           exec "gedit --new-window"
 bindsym $mod+Shift+z     exec "codium"
 bindsym $mod+slash       exec "firefox --private-window"
 bindsym $mod+Shift+slash exec "chromium-browser --incognito"
