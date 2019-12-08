@@ -10,15 +10,16 @@ import sys
 import subprocess
 
 def get_username():
-    '''Return the username of the currently logged in user.'''
     return getpass.getuser()
 
 def list_dir():
-    '''Return a sorted list of directories in the current working directory.'''
+    '''Return a list of directories in the current working directory. Sorted in
+    alphabetical order, ascending order.'''
     return sorted(os.listdir())
 
 def assist_bash(string, symbol):
-    '''Assist Bash to recognise the input symbol.'''
+    '''Include input symbol into the string that has been input from
+    the shell.'''
     new_string = string.split(symbol)
     string = ''
     if len(new_string) == 1:
@@ -32,8 +33,7 @@ def assist_bash(string, symbol):
     return string
 
 def auto_nav(string, count):
-    '''Automagically navigate to the latest folder in Dropbox, without
-    assisting Bash.'''
+    '''Automagically navigate to the latest folder in Dropbox'''
     os.chdir(string)
     while count > 0:
         string += str(list_dir()[-1]) + '/'
@@ -42,8 +42,8 @@ def auto_nav(string, count):
     return string
 
 def prep_str(flag, nav_flag=-1):
-    '''Prepare the string to pass into the bash shell later to open the
-    appropriate directory in PCManFM.'''
+    '''Prepare the string to pass into the shell later to open the
+    appropriate directory in the file manager.'''
     # Administrative Activities
     string = '/home/{}/Dropbox/'.format(get_username())
     os.chdir(string)
