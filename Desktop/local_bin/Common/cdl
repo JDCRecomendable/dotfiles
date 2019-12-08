@@ -17,7 +17,7 @@ def list_dir():
     alphabetical order, ascending order.'''
     return sorted(os.listdir())
 
-def assist_bash(string, symbol):
+def recognise_special_symbol(string, symbol):
     '''Include input symbol into the string that has been input from
     the shell.'''
     new_string = string.split(symbol)
@@ -77,7 +77,7 @@ def prep_str(flag, nav_flag=-1):
     # Assist Bash in recognising special symbols
     symbol_fix = (' ', "'", '"', '(', '[', '{', '<', ')', ']', '}', '>', '&')
     for symbol in symbol_fix:
-        string = assist_bash(string, symbol)
+        string = recognise_special_symbol(string, symbol)
 
     return string
 
