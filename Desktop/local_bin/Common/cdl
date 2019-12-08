@@ -9,6 +9,9 @@ import getpass
 import sys
 import subprocess
 
+file_manager = "nautilus"
+home_dir = "home"
+
 def get_username():
     return getpass.getuser()
 
@@ -45,7 +48,7 @@ def prep_str(flag, nav_flag=-1):
     '''Prepare the string to pass into the shell later to open the
     appropriate directory in the file manager.'''
     # Administrative Activities
-    string = '/home/{}/Dropbox/'.format(get_username())
+    string = '/{}/{}/Dropbox/'.format(home_dir, get_username())
     os.chdir(string)
 
     # Deal with General Contents
@@ -86,7 +89,7 @@ def run(flag, nav_flag=-1):
     user's entered arguments. This is the first function called when the program
     is run in the terminal.'''
     result = prep_str(flag, nav_flag)
-    to_run = 'pcmanfm {}'.format(result)
+    to_run = '{} {}'.format(file_manager, result)
     subprocess.run(['bash', '-c', to_run])
 
 def show_help():
