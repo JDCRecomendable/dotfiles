@@ -55,7 +55,7 @@ def prep_str(flag, nav_flag=-1):
     if flag != 2:
         category_directory = {
             0: 'HOME/',
-            1: 'AVCOL/',
+            # 1: 'AVCOL/',
             3: 'Projects/',
             4: 'Media/'
         }
@@ -63,21 +63,21 @@ def prep_str(flag, nav_flag=-1):
         if flag in (0, 3):
             string = auto_nav(string, 3)
 
-    # Deal with AVCOL Contents
-    else:
-        string += 'AVCOL/2019/'
-        subject_directory = {
-            0: '13ENC/',
-            1: '13MAS/',
-            2: '13MAT/',
-            3: '13PHY/',
-            4: '13TPI/',
-            5: 'ADMIN/'
-        }
-        string += subject_directory[nav_flag]
-        string = auto_nav(string, 3)
+    # # Deal with AVCOL Contents
+    # else:
+    #     string += 'AVCOL/2019/'
+    #     subject_directory = {
+    #         0: '13ENC/',
+    #         1: '13MAS/',
+    #         2: '13MAT/',
+    #         3: '13PHY/',
+    #         4: '13TPI/',
+    #         5: 'ADMIN/'
+    #     }
+    #     string += subject_directory[nav_flag]
+    #     string = auto_nav(string, 3)
 
-    # Assist Bash in recognising special symbols
+    # Assist the shell in recognising special symbols
     symbol_fix = (' ', "'", '"', '(', '[', '{', '<', ')', ']', '}', '>', '&')
     for symbol in symbol_fix:
         string = recognise_special_symbol(string, symbol)
@@ -94,23 +94,31 @@ def run(flag, nav_flag=-1):
 
 def show_help():
     '''Show the help documentation for the program.'''
+#     help_doc = '''Usage: cdl [options] [directories]
+#
+# Options:
+#   -h, --help      show this help message and exit
+#   -H, --home      go to the latest directory in ~/Dropbox/HOME/
+#   -M, --media     go to ~/Dropbox/Media/
+#   -P, --projects  go to the latest directory in ~/Dropbox/Projects/
+#   -A, --avcol     go to ~/Dropbox/AVCOL/
+#   -n, --nav       based on the given directories flag, go to the latest respective directory in ~/Dropbox/AVCOL/
+#
+# Directories (can be called when -n flag is passed into the program):
+#   enc             go to the latest directory in ~/Dropbox/AVCOL/2019/13ENC
+#   mas             go to the latest directory in ~/Dropbox/AVCOL/2019/13MAS
+#   mat             go to the latest directory in ~/Dropbox/AVCOL/2019/13MAT
+#   phy             go to the latest directory in ~/Dropbox/AVCOL/2019/13PHY
+#   tpi             go to the latest directory in ~/Dropbox/AVCOL/2019/13TPI
+#   admin           go to the latest directory in ~/Dropbox/AVCOL/2019/ADMIN'''
+
     help_doc = '''Usage: cdl [options] [directories]
 
 Options:
   -h, --help      show this help message and exit
   -H, --home      go to the latest directory in ~/Dropbox/HOME/
   -M, --media     go to ~/Dropbox/Media/
-  -P, --projects  go to the latest directory in ~/Dropbox/Projects/
-  -A, --avcol     go to ~/Dropbox/AVCOL/
-  -n, --nav       based on the given directories flag, go to the latest respective directory in ~/Dropbox/AVCOL/
-
-Directories (can be called when -n flag is passed into the program):
-  enc             go to the latest directory in ~/Dropbox/AVCOL/2019/13ENC
-  mas             go to the latest directory in ~/Dropbox/AVCOL/2019/13MAS
-  mat             go to the latest directory in ~/Dropbox/AVCOL/2019/13MAT
-  phy             go to the latest directory in ~/Dropbox/AVCOL/2019/13PHY
-  tpi             go to the latest directory in ~/Dropbox/AVCOL/2019/13TPI
-  admin           go to the latest directory in ~/Dropbox/AVCOL/2019/ADMIN'''
+  -P, --projects  go to the latest directory in ~/Dropbox/Projects/'''
     print(help_doc)
 
 if __name__ == '__main__':
@@ -118,8 +126,8 @@ if __name__ == '__main__':
         options = {
             '-H'        : 0,
             '--home'    : 0,
-            '-A'        : 1,
-            '--avcol'   : 1,
+            # '-A'        : 1,
+            # '--avcol'   : 1,
             '-P'        : 3,
             '--projects': 3,
             '-M'        : 4,
@@ -130,22 +138,22 @@ if __name__ == '__main__':
             run(run_flag)
         except:
             show_help()
-    elif len(sys.argv) == 3:
-        if sys.argv[1] in ('-n', '--nav'):
-            nav_options = {
-                'enc'  : 0,
-                'mas'  : 1,
-                'mat'  : 2,
-                'phy'  : 3,
-                'tpi'  : 4,
-                'admin': 5
-            }
-            try:
-                run_nav_flag = nav_options[sys.argv[2]]
-                run(2, run_nav_flag)
-            except:
-                show_help()
-        else:
-            show_help()
+    # elif len(sys.argv) == 3:
+    #     if sys.argv[1] in ('-n', '--nav'):
+    #         nav_options = {
+    #             'enc'  : 0,
+    #             'mas'  : 1,
+    #             'mat'  : 2,
+    #             'phy'  : 3,
+    #             'tpi'  : 4,
+    #             'admin': 5
+    #         }
+    #         try:
+    #             run_nav_flag = nav_options[sys.argv[2]]
+    #             run(2, run_nav_flag)
+    #         except:
+    #             show_help()
+    #     else:
+    #         show_help()
     else:
         show_help()
