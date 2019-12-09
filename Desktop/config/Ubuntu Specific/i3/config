@@ -191,8 +191,8 @@ bindsym $mod+F4          exec "shutdown -h now"
 bindsym $mod+F5          exec "shutdown -r now"
 bindsym $mod+x           exec "gnome-screenshot -i"
 bindsym $mod+Shift+x     exec "simplescreenrecorder"
-bindsym XF86MonBrightnessDown exec "sudo bri d"
-bindsym XF86MonBrightnessUp   exec "sudo bri u"
+bindsym XF86MonBrightnessDown exec "sudo /home/jdcrecomendable/.local/bin/bri d"
+bindsym XF86MonBrightnessUp   exec "sudo /home/jdcrecomendable/.local/bin/bri u"
 
 # user-specified key bindings for directories
 bindsym $mod+Mod1+Shift+b exec "nautilus -w /home/jdcrecomendable/Apps"
