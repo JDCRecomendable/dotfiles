@@ -65,22 +65,30 @@ def prep_str(flag, nav_flag=-1):
 
     # Deal with UoA Contents
     else:
-        string += 'UoA/2020/'
+        string += 'UoA/'
         subject_directory = {
-            0: 'ADMIN/',
-            1: 'BOOKS/',
-            2: 'ENGGEN115/',
-            3: 'ENGGEN121/',
-            4: 'ENGGEN140/',
-            5: 'ENGSCI111/',
-            6: 'BOOKS/ENGGEN115/',
-            7: 'BOOKS/ENGGEN121/',
-            8: 'BOOKS/ENGGEN140/',
-            9: 'BOOKS/ENGSCI111/',
+            0 : 'ADMIN/',
+            1 : 'BOOKS/',
+            2 : 'BOOKS/2020-S1/ENGGEN115/',
+            3 : 'BOOKS/2020-S1/ENGGEN121/',
+            4 : 'BOOKS/2020-S1/ENGGEN140/',
+            5 : 'BOOKS/2020-S1/ENGSCI111/',
+            6 : 'CLUBS/',
+            7 : 'COURSES/',
+            8 : 'COURSES/2020-S1/ENGGEN115/',
+            9 : 'COURSES/2020-S1/ENGGEN121/',
+            10: 'COURSES/2020-S1/ENGGEN140/',
+            11: 'COURSES/2020-S1/ENGSCI111/'
         }
         string += subject_directory[nav_flag]
-        if nav_flag not in (1, 6, 7, 8, 9):
+
+        # Auto-Navigate for admin directory
+        if nav_flag in (0,):
             string = auto_nav(string, 3)
+        
+        # Auto-Navigate for each course
+        elif nav_flag in (8, 9, 10, 11):
+            string = auto_nav(string, 2)
 
     # Assist the shell in recognising special symbols
     symbol_fix = (' ', "'", '"', '(', '[', '{', '<', ')', ']', '}', '>', '&')
@@ -109,16 +117,18 @@ Options:
   -U  --uni       go to ~/Dropbox/UoA/
 
 Directories (can be called when -n flag is passed into the program):
-  admin  go to the latest directory in ~/Dropbox/UoA/2020/ADMIN/
-  books  go to ~/Dropbox/UoA/2020/BOOKS/
-  115b   go to ~/Dropbox/UoA/2020/BOOKS/ENGGEN115/
-  121b   go to ~/Dropbox/UoA/2020/BOOKS/ENGGEN121/
-  140b   go to ~/Dropbox/UoA/2020/BOOKS/ENGGEN140/
-  111b   go to ~/Dropbox/UoA/2020/BOOKS/ENGSCI111/
-  115    go to the latest directory in ~/Dropbox/UoA/2020/ENGGEN115/
-  121    go to the latest directory in ~/Dropbox/UoA/2020/ENGGEN121/
-  140    go to the latest directory in ~/Dropbox/UoA/2020/ENGGEN140/
-  111    go to the latest directory in ~/Dropbox/UoA/2020/ENGSCI111/'''
+  admin    go to the latest directory in ~/Dropbox/UoA/ADMIN/
+  books    go to ~/Dropbox/UoA/BOOKS/
+  115b     go to ~/Dropbox/UoA/BOOKS/2020-S1/ENGGEN115/
+  121b     go to ~/Dropbox/UoA/BOOKS/2020-S1/ENGGEN121/
+  140b     go to ~/Dropbox/UoA/BOOKS/2020-S1/ENGGEN140/
+  111b     go to ~/Dropbox/UoA/BOOKS/2020-S1/ENGSCI111/
+  clubs    go to ~/Dropbox/UoA/CLUBS/
+  courses  go to ~/Dropbox/UoA/COURSES/
+  115      go to the latest directory in ~/Dropbox/UoA/2020/ENGGEN115/
+  121      go to the latest directory in ~/Dropbox/UoA/2020/ENGGEN121/
+  140      go to the latest directory in ~/Dropbox/UoA/2020/ENGGEN140/
+  111      go to the latest directory in ~/Dropbox/UoA/2020/ENGSCI111/'''
     print(help_doc)
 
 if __name__ == '__main__':
@@ -141,16 +151,18 @@ if __name__ == '__main__':
     elif len(sys.argv) == 3:
         if sys.argv[1] in ('-n', '--nav'):
             nav_options = {
-                'admin': 0,
-                'books': 1,
-                '115'  : 2,
-                '121'  : 3,
-                '140'  : 4,
-                '111'  : 5,
-                '115b' : 6,
-                '121b' : 7,
-                '140b' : 8,
-                '111b' : 9
+                'admin'   : 0,
+                'books'   : 1,
+                '115b'    : 2,
+                '121b'    : 3,
+                '140b'    : 4,
+                '111b'    : 5,
+                'clubs'   : 6,
+                'courses' : 7,
+                '115'     : 8,
+                '121'     : 9,
+                '140'     : 10,
+                '111'     : 11
             }
             try:
                 run_nav_flag = nav_options[sys.argv[2]]
