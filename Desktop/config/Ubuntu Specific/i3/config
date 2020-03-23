@@ -183,6 +183,7 @@ bindsym $mod+Shift+slash exec "chromium-browser --incognito"
 bindsym $mod+backslash   exec "nautilus -w"
 bindsym $mod+o           exec "libreoffice"
 bindsym $mod+Shift+o     exec "texworks"
+bindsym $mod+m           exec "thunderbird"
 
 # user-specified key bindings for system tasks
 bindsym $mod+l           exec "xscreensaver-command -lock"

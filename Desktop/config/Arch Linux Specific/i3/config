@@ -196,6 +196,7 @@ bindsym $mod+Shift+slash exec "chromium --incognito"
 bindsym $mod+backslash   exec "pcmanfm"
 bindsym $mod+o           exec "libreoffice"
 bindsym $mod+Shift+o     exec "texworks"
+bindsym $mod+m           exec "thunderbird"
 
 # user-specified key bindings for system tasks
 bindsym $mod+l           exec "xscreensaver-command -lock"
