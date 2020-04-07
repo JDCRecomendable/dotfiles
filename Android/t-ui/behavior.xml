@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BEHAVIOR>
 <double_tap_lock value="false"/>
-<double_tap_cmd value="clear"/>
+<double_tap_cmd value="restart"/>
 <random_play value="false"/>
 <songs_folder value=""/>
 <songs_from_mediastore value="false"/>
 <tui_notification value="false"/>
 <auto_show_keyboard value="true"/>
 <auto_scroll value="true"/>
-<show_hints value="false"/>
+<show_hints value="true"/>
 <show_alias_content value="true"/>
 <show_launch_history value="true"/>
-<clear_after_cmds value="-1"/>
+<clear_after_cmds value="1000"/>
 <clear_after_seconds value="-1"/>
 <max_lines value="-1"/>
 <time_format value="yyyy-MM-dd HH:mm:ss@HH:mm:ss"/>
@@ -19,11 +19,11 @@
 <battery_medium value="50"/>
 <battery_low value="15"/>
 <device_format value="%d | %u"/>
-<network_info_format value="Internet     : %(Wi-Fi - %wn/%[Mobile Data - %d3/No Internet Access])"/>
-<battery_format value="Battery      : %(Charging - /)%v%"/>
-<storage_format value="Int. Storage : %iavgb GB of %itotgb GB (%iav%%)"/>
-<ram_format value="Avail. RAM   : %avgb GB of %totgb GB (%av%%)"/>
-<input_format value="[%t1]%p %i"/>
+<network_info_format value="Internet            : %(Wi-Fi - %wn/%[Mobile Data - %d3/No Internet Access])"/>
+<battery_format value="Battery             : %(Charging - /)%v%"/>
+<storage_format value="Avail. Int. Storage : %iavmb MB of %itotmb MB (%iav%%)"/>
+<ram_format value="Avail. RAM          : %avmb MB of %totmb MB (%av%%)"/>
+<input_format value="[%t]%p %i"/>
 <output_format value="%o"/>
 <session_info_format value="%u@%d:%p"/>
 <enable_app_launch value="true"/>
@@ -39,7 +39,7 @@
 <app_uninstalled_format value="App uninstalled: %p"/>
 <enable_music value="false"/>
 <max_optional_depth value="2"/>
-<network_info_update_ms value="5000"/>
+<network_info_update_ms value="10000"/>
 <tui_notification_title value="T-UI"/>
 <tui_notification_subtitle value="T-UI is running"/>
 <tui_notification_click_cmd value=""/>
@@ -56,4 +56,23 @@
 <notes_sorting value="0"/>
 <notes_allow_link value="true"/>
 <orientation value="2"/>
+<htmlextractor_default_format value="%t -&gt; %v%n%a(%an = %av)(%n)"/>
+<htmlextractor_notfound_message value="Not found"/>
+<tui_notification_time_color value="#03A9F4"/>
+<tui_notification_input_color value="#ff00ff00"/>
+<weather_key value="1f798f99228596c20ccfda51b9771a86"/>
+<weather_temperature_measure value="metric"/>
+<weather_location value="null"/>
+<weather_format value="Weather: %main, Temp: %temp"/>
+<clear_on_lock value="false"/>
+<unlock_counter_format value="Unlocked %c times (%a10/)%n%t(Unlock n. %i --&gt; %w)3"/>
+<unlock_time_divider value="%n"/>
+<unlock_time_order value="1"/>
+<unlock_counter_cycle_start value="6.00"/>
+<not_available_text value="N/A"/>
+<back_button_enabled value="true"/>
+<weather_update_time value="3600"/>
+<location_update_mintime value="20"/>
+<location_update_mindistance value="500"/>
+<show_weather_updates value="true"/>
 </BEHAVIOR>
