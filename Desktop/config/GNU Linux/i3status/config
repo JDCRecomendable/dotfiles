@@ -19,12 +19,14 @@ order += "memory"
 order += "tztime local"
 
 wireless _first_ {
-        format_up = "WI-FI: %quality @ %essid (%bitrate, %frequency) %ip"
+        # format_up = "WI-FI: %quality @ %essid (%bitrate, %frequency) %ip"
+        format_up = "WI-FI: %quality (%bitrate, %frequency)"
         format_down = "WI-FI: down"
 }
 
 ethernet _first_ {
-        format_up = "ETH: %ip (%speed)"
+        # format_up = "ETH: %ip (%speed)"
+        format_up = "ETH: $speed"
         format_down = "ETH: down"
 }
 
