@@ -2,154 +2,106 @@
 
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2018 Jared Daniel Carbonell Recomendable.
+# Copyright (c) 2018-2020 Jared Daniel Carbonell Recomendable.
 
-from datetime import datetime
-import os
-import sys
+from datetime import date
+from os import listdir, mkdir
+from sys import argv
 
-dirs = sorted(os.listdir())
+dirs = sorted(listdir())
 
-def dir_exists(string):
-    """Check if a directory in the current working directory has a similar name
-    as the input string.
+def string_in_dir_names(dir_name: str):
+    """Check if input dir_name is a subset of the names of one of the
+    directories in the current working directory.
+
+    Used to determine if directory yyyymmdd_xx is taken, where yyyymmdd
+    is the date and xx is the xx'th directory in that date.
     """
     for dir in dirs:
-        if string in dir:
+        if dir_name in dir:
+            dirs.pop(0)
             return True
     return False
 
-def is_leap(year):
-    """Return True if leap year, else False."""
-    year = int(year)
-    if year % 4 != 0:
-        return False
-    else:
-        if year % 100 == 0:
-            if year % 400 == 0:
-                return True
-            else:
-                return False
-        else:
-            return True
+def gen_date_string(no_of_days: int = 0):
+    """Return a date string in the form of YYYYMMDD.
 
-def make_template(variant=0):
-    """Return a date string in the form of "YYMMDD_"."""
-    datetime_now = datetime.now()
-    yy = str(datetime_now.year)
-    mm = str(datetime_now.month)
-    if variant == 0:
-        dd = str(datetime_now.day)
-    elif variant == 1:
-        dd = str(datetime_now.day-1)
-        if dd == '0':
-            if int(mm) in (1,2,4,6,8,9,11):
-                dd = '31'
-                mm = str(int(mm) - 1)
-            elif int(mm) in (5,7,10,12):
-                dd = '30'
-                mm = str(int(mm) - 1)
-            elif is_leap(yy):
-                dd = '29'
-                mm = '02'
-            else:
-                dd = '28'
-                mm = '02'
-    elif variant == 2:
-        dd = str(datetime_now.day+1)
-        if dd == '32':
-            dd = '01'
-            mm = str(int(mm) + 1)
-        if dd == '31' and (int(mm) in (4,6,9,11)):
-            dd = '01'
-            mm = str(int(mm) + 1)
-        if mm == '2' and not(is_leap(yy)) and (int(dd) in range(29,33)):
-            dd = '01'
-            mm = '03'
-        if mm == '2' and is_leap(yy) and (int(dd) in range(30,33)):
-            dd = '01'
-            mm = '03'
-    if mm == '0':
-        mm = '12'
-        yy = str(int(yy) - 1)
-    if mm == '13':
-        mm = '01'
-        yy = str(int(yy) + 1)
-    if len(mm) == 1:
-        mm = '0' + mm
-    if len(dd) == 1:
-        dd = '0' + dd
-    return yy+mm+dd+'_'
-
-def new_name(variant=0):
-    """Return the proposed name of the directory in the form of "YYMMDD_NN",
-    where NN refers to the serial number of the directory.
+    Input no_of_days defaults to zero, meaning return current date.
+    If no_of_days > 0, return date after no_of_days has passed from today.
+    If no_of_days < 0, return date before |no_of_days| has passed from today.
     """
-    template = make_template(variant)
-    for i in range(1,10):
-        if not(dir_exists(template+'0'+str(i))):
-            return template+'0'+str(i)
-    for i in range(10,100):
-        if not(dir_exists(template+'0'+str(i))):
-            return template+str(i)
-    return template+'99'
+    date_int = date.today().toordinal() + no_of_days
+    date_tup = date.fromordinal(date_int).strftime("%Y%m%d")
+    return date_tup
 
-def make_folder(variant=0, name_append=''):
-    """Make the directory in the current working directory. This is the
-    function that does the intended process of the program.
+def gen_dir_name(no_of_days: int = 0, dir_name_string: str = ""):
+    """Return the string for the name of the directory to generate.
+
+    See gen_date_string() for info on input no_of_days.
+    Input dir_name_string is the name of the directory.
+    """
+    dir_string = gen_date_string(no_of_days)
+    for i in range(1, 99):
+        append = str(i)
+        if len(append) < 2:
+            append = "0" + append
+        proposed_name = "{}_{}".format(dir_string, append)
+        if not string_in_dir_names(proposed_name):
+            if dir_name_string == "":
+                return proposed_name
+            return "{} '{}'".format(proposed_name, dir_name_string)
+    if dir_name_string == "":
+        return "{}_99".format(dir_string)
+    return "{}_99 '{}'".format(dir_string, dir_name_string)
+
+def make_directory(no_of_days: int = 0, dir_name_string: str = ""):
+    """Actually perform mkdir.
+    
+    See gen_dir_name() for input parameter details.
     """
     try:
-        name = new_name(variant)
-        name_append = name_append.strip()
-        if len(name_append) > 0:
-            name = '{} \'{}\''.format(name, name_append)
-        os.mkdir(name)
-        return 0, name
+        dir_name = gen_dir_name(no_of_days, dir_name_string)
+        mkdir(dir_name)
+        show_dir_successfully_made(dir_name)
     except FileExistsError:
-        return 1, 'Maximum number of directories for the day reached. You \
-worked too hard. Go home to the park.'
+        show_dir_limit_exceeded()
+        exit(1)
 
-def run(variant=0, name_append=''):
-    """Carry out the process of making a directory in the current working
-    directory. This is the first function called when the program is run in the
-    terminal.
-    """
-    n = make_folder(variant, name_append)
-    if n[0] == 0:
-        print('Directory with the name {} successfully created.'.format(n[1]))
-    else:
-        print(n[1])
+def show_dir_limit_exceeded():
+    print("ERROR: Limit reached for number of directories created today.")
+
+def show_dir_successfully_made(dir_name):
+    print('Directory "{}" successfully created.'.format(dir_name))
 
 def show_help():
     """Show the help documentation for the program."""
-    help_doc = '''Usage: mkdird [options] [directory name]
+    help_doc = """Usage: mkdird [options] [directory name]
 
 Options:
   -h, --help          show this help message and exit
-  -p, --previous-day  same as calling the function, but the date is set to the \
-previous day
-  -n, --next-day      same as calling the function, but the date is set to the \
-next day'''
+  -p <value>          date of directory is <value> days before current date
+  -n <value>          date of directory is <value> days after current date"""
     print(help_doc)
 
-if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        run()
+if __name__ == "__main__":
+    if len(argv) == 1:
+        make_directory()
     else:
-        variant = 0
-        start_index = 1
-        name_append = ''
-        end_index = len(sys.argv) - 1
-        if sys.argv[1] in ('-h', '--help'):
-            show_help()
-            sys.exit(0)
-        elif sys.argv[1] in ('-p', '--previous-day'):
-            variant = 1
-            start_index += 1
-        elif sys.argv[1] in ('-n', '--next-day'):
-            variant = 2
-            start_index += 1
-        while start_index <= end_index:
-            name_append += sys.argv[start_index] + ' '
-            start_index += 1
-        run(variant, name_append)
+        no_of_days = 0
+        start_i = 1
+        if argv[1] in ('-p', '-n'):
+            start_i += 2
+            if len(argv) > 2 and argv[2].isnumeric():
+                no_of_days = int(argv[2])
+            else:
+                no_of_days = 1
+                start_i -= 1
+            if argv[1] == "-p":
+                no_of_days *= -1
+        dir_name = ""
+        for i in range(start_i, len(argv)):
+            if i == len(argv) - 1:
+                dir_name += str(argv[i])
+                break
+            dir_name += "{} ".format(argv[i])
+        make_directory(no_of_days, dir_name)
