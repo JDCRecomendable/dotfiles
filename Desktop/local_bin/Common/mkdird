@@ -89,6 +89,9 @@ if __name__ == "__main__":
     if len(argv) == 1:
         make_directory()
     else:
+        if argv[1] in ("-h", "--help"):
+            show_help()
+            exit(0)
         no_of_days = 0
         start_i = 1
         if argv[1] in ("-p", "-n"):
