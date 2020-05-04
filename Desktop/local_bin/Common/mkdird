@@ -91,7 +91,7 @@ if __name__ == "__main__":
     else:
         no_of_days = 0
         start_i = 1
-        if argv[1] in ('-p', '-n'):
+        if argv[1] in ("-p", "-n"):
             start_i += 2
             if len(argv) > 2 and argv[2].isnumeric():
                 no_of_days = int(argv[2])
