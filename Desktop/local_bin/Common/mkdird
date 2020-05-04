@@ -79,8 +79,10 @@ def show_help():
 
 Options:
   -h, --help          show this help message and exit
-  -p <value>          date of directory is <value> days before current date
-  -n <value>          date of directory is <value> days after current date"""
+  -p <value> = 1      date of directory is <value> days before current date
+                      when left unspecified, <value> defaults to 1
+  -n <value> = 1      date of directory is <value> days after current date
+                      when left unspecified, <value> defaults to 1"""
     print(help_doc)
 
 if __name__ == "__main__":
