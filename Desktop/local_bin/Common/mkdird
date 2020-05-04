@@ -71,7 +71,7 @@ def show_dir_limit_exceeded():
     print("ERROR: Limit reached for number of directories created today.")
 
 def show_dir_successfully_made(dir_name):
-    print('Directory "{}" successfully created.'.format(dir_name))
+    print("Directory {} successfully created.".format(dir_name))
 
 def show_help():
     """Show the help documentation for the program."""
