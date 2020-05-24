@@ -1,0 +1,91 @@
+#!/usr/bin/env python3
+
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2020 Jared Daniel Carbonell Recomendable.
+
+import wx
+from subprocess import run
+
+'''
+DEPENDENCIES
+* `cdl` in .local/bin
+* wxPython
+'''
+
+# [has_book_dir, label, cdl_n_command, keycode_binding] OR
+# [has_book_dir, label, cdl_n_command, keycode_binding, keycode_binding_book]
+DIRS = [
+    [0, 'ADMIN', 'admin', '0'],
+    [1, 'ENGGEN 115', '115', '1', '!'],
+    [1, 'ENGGEN 121', '121', '2', '@'],
+    [1, 'ENGGEN 140', '140', '3', '#'],
+    [1, 'ENGGEN 111', '111', '4', '$'],
+    [0, 'CLUBS', 'clubs', '9']
+]
+
+COMMAND = '~/.local/bin/cdl -n {}'
+COMMAND_BOOK_DIR = '~/.local/bin/cdl -n {}b'
+
+class MainFrame(wx.Frame):
+    def __init__(self):
+        # Define main window
+        super().__init__(parent=None, title='Main Menu')
+        panel = wx.Panel(self)
+        container_main = wx.BoxSizer(wx.VERTICAL)
+
+        # Set up GUI components and layout for the directories
+        for dir in DIRS:
+            # List each directory option
+            container = wx.BoxSizer(wx.HORIZONTAL)
+            label = wx.StaticText(panel, label=dir[1])
+
+            # Add button for each directory option
+            button_dir = wx.Button(panel, label='Go')
+            button_dir.Bind(wx.EVT_BUTTON, self.button_press(code=dir[3]))
+
+            # Set up layout in GUI for each directory option
+            container.Add(label, 1, wx.ALIGN_LEFT | wx.ALIGN_CENTRE_VERTICAL, 0)
+            container.Add(button_dir, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
+
+            # Additionally add the button for the corresponding books directory, if present
+            if dir[0] == 1:
+                button_books = wx.Button(panel, label='Books')
+                button_books.Bind(wx.EVT_BUTTON, self.button_press(code=dir[4]))
+                container.Add(button_books, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
+
+            container_main.Add(container, 1, wx.EXPAND | wx.ALL, 8)
+
+        # Listen to keyboard events
+        panel.Bind(wx.EVT_CHAR, self.key_press)
+
+        # Finally prepare to show the window
+        panel.SetSizer(container_main)
+        panel.SetFocus()
+        self.Show()
+
+    def button_press(self, code):
+        def on_click(event):
+            self.goto_dir(ord(code))
+        return on_click
+    
+    def key_press(self, event):
+        code = event.GetKeyCode()
+        self.goto_dir(code)
+    
+    def goto_dir(self, code):
+        '''Open the intended directory using cdl.'''
+        for dir in DIRS:
+            if code == ord(dir[3]):
+                run(['bash', '-c', COMMAND.format(dir[2])])
+                self.Destroy()
+            if dir[0] and code == ord(dir[4]):
+                run(['bash', '-c', COMMAND_BOOK_DIR.format(dir[2])])
+                self.Destroy()
+            if code == ord('Q') or code == ord('q'):
+                self.Destroy()
+
+if __name__ == '__main__':
+    app = wx.App()
+    frame = MainFrame()
+    app.MainLoop()
