@@ -28,13 +28,16 @@ COMMAND = '~/.local/bin/cdl -n {}'
 COMMAND_BOOK_DIR = '~/.local/bin/cdl -n {}b'
 
 WIN_SIZE = (360, 360)
-WIN_ORIGIN = (40, 40)
+WIN_ORIGIN = (780, 360)
 
 class MainFrame(wx.Frame):
     def __init__(self):
         # Define main window
         super().__init__(parent=None, title='Main Menu')
         panel = wx.Panel(self)
+        panel.SetBackgroundColour((0, 0, 0))
+        panel.SetForegroundColour((255, 255, 255))
+        panel.SetFont(wx.Font(16, wx.MODERN, wx.NORMAL, wx.BOLD))
         container_main = wx.BoxSizer(wx.VERTICAL)
 
         # Set up GUI components and layout for the directories
@@ -44,22 +47,28 @@ class MainFrame(wx.Frame):
             label = wx.StaticText(panel, label=dir[1])
 
             # Add button for each directory option
-            button_dir = wx.Button(panel, label='Go')
+            button_dir = wx.Button(panel, label='{}'.format(dir[3]))
             button_dir.Bind(wx.EVT_BUTTON, self.button_press(code=dir[3]))
+            button_dir.SetBackgroundColour((0, 128, 0))
+            button_dir.SetForegroundColour((255, 255, 255))
 
             # Button also listens for keyboard events if focussed
             button_dir.Bind(wx.EVT_CHAR, self.key_press)
 
-            # Set up layout in GUI for each directory option
+            # Add label for each directory option
             container.Add(label, 1, wx.ALIGN_LEFT | wx.ALIGN_CENTRE_VERTICAL, 0)
-            container.Add(button_dir, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
 
-            # Additionally add the button for the corresponding books directory, if present
+            # Add the button for the corresponding books directory, if present
             if dir[0] == 1:
-                button_books = wx.Button(panel, label='Books')
+                button_books = wx.Button(panel, label='⇧{}'.format(dir[3]))
                 button_books.Bind(wx.EVT_BUTTON, self.button_press(code=dir[4]))
                 button_books.Bind(wx.EVT_CHAR, self.key_press)
+                button_books.SetBackgroundColour((128, 128, 0))
+                button_books.SetForegroundColour((255, 255, 255))
                 container.Add(button_books, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
+
+            # Add the button for directory
+            container.Add(button_dir, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
 
             container_main.Add(container, 1, wx.EXPAND | wx.ALL, 8)
 
