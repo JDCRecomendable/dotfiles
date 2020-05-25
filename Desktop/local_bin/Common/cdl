@@ -103,7 +103,7 @@ def run(flag, nav_flag=-1):
     is run in the terminal.'''
     result = prep_str(flag, nav_flag)
     to_run = '{} {}'.format(file_manager, result)
-    subprocess.run(['bash', '-c', to_run])
+    subprocess.Popen(['bash', '-c', to_run])
 
 def show_help():
     '''Show the help documentation for the program.'''

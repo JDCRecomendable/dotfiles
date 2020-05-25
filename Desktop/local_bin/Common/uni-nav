@@ -5,7 +5,7 @@
 # Copyright (c) 2020 Jared Daniel Carbonell Recomendable.
 
 import wx
-from subprocess import run
+from subprocess import Popen
 
 '''
 DEPENDENCIES
@@ -82,10 +82,10 @@ class MainFrame(wx.Frame):
         '''Open the intended directory using cdl.'''
         for dir in DIRS:
             if code == ord(dir[3]):
-                run(['bash', '-c', COMMAND.format(dir[2])])
+                Popen(['bash', '-c', COMMAND.format(dir[2])])
                 self.Destroy()
             if dir[0] and code == ord(dir[4]):
-                run(['bash', '-c', COMMAND_BOOK_DIR.format(dir[2])])
+                Popen(['bash', '-c', COMMAND_BOOK_DIR.format(dir[2])])
                 self.Destroy()
             if code == ord('Q') or code == ord('q'):
                 self.Destroy()
