@@ -27,6 +27,9 @@ DIRS = [
 COMMAND = '~/.local/bin/cdl -n {}'
 COMMAND_BOOK_DIR = '~/.local/bin/cdl -n {}b'
 
+WIN_SIZE = (360, 360)
+WIN_ORIGIN = (40, 40)
+
 class MainFrame(wx.Frame):
     def __init__(self):
         # Define main window
@@ -66,7 +69,7 @@ class MainFrame(wx.Frame):
         # Finally prepare to show the window
         panel.SetSizer(container_main)
         panel.SetFocus()
-        self.SetSize(0, 0, 360, 360)
+        self.SetSize(WIN_ORIGIN[0], WIN_ORIGIN[1], WIN_SIZE[0], WIN_SIZE[1])
         self.Show()
 
     def button_press(self, code):
@@ -94,4 +97,3 @@ if __name__ == '__main__':
     app = wx.App()
     frame = MainFrame()
     app.MainLoop()
-
