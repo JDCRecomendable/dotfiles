@@ -49,8 +49,6 @@ class MainFrame(wx.Frame):
             # Add button for each directory option
             button_dir = wx.Button(panel, label='{}'.format(dir[3]))
             button_dir.Bind(wx.EVT_BUTTON, self.button_press(code=dir[3]))
-            button_dir.SetBackgroundColour((0, 128, 0))
-            button_dir.SetForegroundColour((255, 255, 255))
 
             # Button also listens for keyboard events if focussed
             button_dir.Bind(wx.EVT_CHAR, self.key_press)
@@ -63,8 +61,6 @@ class MainFrame(wx.Frame):
                 button_books = wx.Button(panel, label='⇧{}'.format(dir[3]))
                 button_books.Bind(wx.EVT_BUTTON, self.button_press(code=dir[4]))
                 button_books.Bind(wx.EVT_CHAR, self.key_press)
-                button_books.SetBackgroundColour((128, 128, 0))
-                button_books.SetForegroundColour((255, 255, 255))
                 container.Add(button_books, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
 
             # Add the button for directory
