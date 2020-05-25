@@ -44,6 +44,9 @@ class MainFrame(wx.Frame):
             button_dir = wx.Button(panel, label='Go')
             button_dir.Bind(wx.EVT_BUTTON, self.button_press(code=dir[3]))
 
+            # Button also listens for keyboard events if focussed
+            button_dir.Bind(wx.EVT_CHAR, self.key_press)
+
             # Set up layout in GUI for each directory option
             container.Add(label, 1, wx.ALIGN_LEFT | wx.ALIGN_CENTRE_VERTICAL, 0)
             container.Add(button_dir, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
@@ -52,6 +55,7 @@ class MainFrame(wx.Frame):
             if dir[0] == 1:
                 button_books = wx.Button(panel, label='Books')
                 button_books.Bind(wx.EVT_BUTTON, self.button_press(code=dir[4]))
+                button_books.Bind(wx.EVT_CHAR, self.key_press)
                 container.Add(button_books, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
 
             container_main.Add(container, 1, wx.EXPAND | wx.ALL, 8)
@@ -62,6 +66,7 @@ class MainFrame(wx.Frame):
         # Finally prepare to show the window
         panel.SetSizer(container_main)
         panel.SetFocus()
+        self.SetSize(0, 0, 360, 360)
         self.Show()
 
     def button_press(self, code):
@@ -89,3 +94,4 @@ if __name__ == '__main__':
     app = wx.App()
     frame = MainFrame()
     app.MainLoop()
+
