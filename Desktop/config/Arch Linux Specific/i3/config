@@ -191,7 +191,7 @@ bar {
 # user-specified application-launching key bindings
 bindsym $mod+z           exec "leafpad"
 bindsym $mod+Shift+z     exec "vscodium"
-bindsym $mod+period      exec "/home/jdcrecomendable/.local/bin/uni-nav"
+bindsym $mod+period      exec ".local/bin/uni-nav"
 bindsym $mod+slash       exec "firefox --private-window"
 bindsym $mod+Shift+slash exec "chromium --incognito"
 bindsym $mod+backslash   exec "pcmanfm"
