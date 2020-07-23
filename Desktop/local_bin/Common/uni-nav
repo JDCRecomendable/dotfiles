@@ -81,11 +81,11 @@ class MainFrame(wx.Frame):
         def on_click(event):
             self.goto_dir(ord(code))
         return on_click
-    
+
     def key_press(self, event):
         code = event.GetKeyCode()
         self.goto_dir(code)
-    
+
     def goto_dir(self, code):
         '''Open the intended directory using cdl.'''
         for dir in DIRS:
