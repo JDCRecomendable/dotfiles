@@ -13,22 +13,23 @@ DEPENDENCIES
 * wxPython
 '''
 
-# [has_book_dir, label, cdl_n_command, keycode_binding] OR
-# [has_book_dir, label, cdl_n_command, keycode_binding, keycode_binding_book]
+# [has_book_dir, label, cdl_command, keycode_binding] OR
+# [has_book_dir, label, cdl_command, keycode_binding, keycode_binding_book]
 DIRS = [
     [0, 'ADMIN', 'admin', '0'],
-    [1, 'BUSINESS 151G', '151g', '1', '!'],
+    [0, 'BUSINESS 151G', '151g', '1', '!'],
     [1, 'CHEMMAT 121', '121', '2', '@'],
     [1, 'ELECTENG 101', '101', '3', '#'],
     [1, 'ENGGEN 131', '131', '4', '$'],
+    [0, 'UoA WORK', 'work', '8'],
     [0, 'CLUBS', 'clubs', '9']
 ]
 
-COMMAND = '~/.local/bin/cdl -n {}'
-COMMAND_BOOK_DIR = '~/.local/bin/cdl -n {}b'
+COMMAND = '~/.local/bin/cdl u-{}'
+COMMAND_BOOK_DIR = '~/.local/bin/cdl u-{}b'
 
 WIN_SIZE = (360, 360)
-WIN_ORIGIN = (780, 360)
+WIN_ORIGIN = (544, 220)
 
 class MainFrame(wx.Frame):
     def __init__(self):

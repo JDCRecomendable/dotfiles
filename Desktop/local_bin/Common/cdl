@@ -2,174 +2,97 @@
 
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2018-2020 Jared Daniel Carbonell Recomendable.
+# Copyright (c) 2020 Jared Daniel Carbonell Recomendable.
 
+
+from getpass import getuser
 import os
-import getpass
 import sys
 import subprocess
 
-file_manager = "pcmanfm"
-home_dir = "home"
 
-def get_username():
-    return getpass.getuser()
+# Computer-specific constants
+FILE_MANAGER_CMD = 'open'
+HOME_DIR = 'Users'
+USERNAME = getuser()
+DROPBOX_DIR = '/{}/{}/Dropbox/'.format(HOME_DIR, USERNAME)
 
+
+# File locations
+# Structure:
+#     'CMD_PARAM': [AUTO_NAV_DEPTH, 'RELATIVE FILE_LOCATION']
+NAV_DIRS = {
+        # Root Level
+        'h': [3, 'HOME'],
+        'm': [0, 'Media'],
+        'p': [3, 'Projects'],
+        'u': [0, 'UoA'],
+        'w': [0, 'Work'],
+
+        # Frequent Directories
+        'u-admin'  : [3, 'UoA/ADMIN'],
+        'u-books'  : [1, 'UoA/BOOKS'],
+        'u-clubs'  : [0, 'UoA/CLUBS'],
+        'u-courses': [1, 'UoA/COURSES'],
+        'u-extcurr': [0, 'UoA/EXTCURR'],
+        'u-work'   : [1, 'UoA/WORK'],
+        'w-b'      : [4, 'WORK/Bestcoder'],
+        'u-121b'   : [0, 'UoA/BOOKS/2020-S2/CHEMMAT121'],
+        'u-101b'   : [0, 'UoA/BOOKS/2020-S2/ELECTENG101'],
+        'u-131b'   : [0, 'UoA/BOOKS/2020-S2/ENGGEN131'],
+        'u-151g'   : [2, 'UoA/COURSES/2020-S2/BUSINESS151G'],
+        'u-121'    : [2, 'UoA/COURSES/2020-S2/CHEMMAT121'],
+        'u-101'    : [2, 'UoA/COURSES/2020-S2/ELECTENG101'],
+        'u-131'    : [2, 'UoA/COURSES/2020-S2/ENGGEN131'],
+}
+
+
+# Utility Functions
 def list_dir():
-    '''Return a list of directories in the current working directory. Sorted in
-    alphabetical order, ascending order.'''
+    '''List directories in current working directory, ascending order.'''
     return sorted(os.listdir())
 
-def recognise_special_symbol(string, symbol):
-    '''Include input symbol into the string that has been input from
-    the shell.'''
-    new_string = string.split(symbol)
-    string = ''
-    if len(new_string) == 1:
-        string = new_string[0]
-    else:
-        for i in range(len(new_string)):
-            if i == len(new_string) - 1:
-                string += new_string[i]
-            else:
-                string += new_string[i] + '\\{}'.format(symbol)
-    return string
+def auto_nav(target_dir, auto_nav_depth):
+    '''Navigate to latest folder.'''
+    os.chdir(target_dir)
+    target_dir += '/'
+    while auto_nav_depth > 0:
+        target_dir += str(list_dir()[-1]) + '/'
+        os.chdir(target_dir)
+        auto_nav_depth -= 1
+    return target_dir
 
-def auto_nav(string, count):
-    '''Automagically navigate to the latest folder in Dropbox'''
-    os.chdir(string)
-    while count > 0:
-        string += str(list_dir()[-1]) + '/'
-        os.chdir(string)
-        count -= 1
-    return string
+def parse_dir_path(cmd_param):
+    '''Parse absolute path to target directory.'''
+    auto_nav_depth, relative_target_dir = NAV_DIRS[cmd_param]
+    target_dir = DROPBOX_DIR + relative_target_dir
+    return auto_nav(target_dir, auto_nav_depth)
 
-def prep_str(flag, nav_flag=-1):
-    '''Prepare the string to pass into the shell later to open the
-    appropriate directory in the file manager.'''
-    # Administrative Activities
-    string = '/{}/{}/Dropbox/'.format(home_dir, get_username())
-    os.chdir(string)
+def parse_cmd(dir_path):
+    return '{} "{}"'.format(FILE_MANAGER_CMD, dir_path)
 
-    # Deal with General Contents
-    if flag != 2:
-        category_directory = {
-            0: 'HOME/',
-            1: 'UoA/',
-            3: 'Projects/',
-            4: 'Media/'
-        }
-        string += category_directory[flag]
-        if flag in (0, 3):
-            string = auto_nav(string, 3)
+def run(cmd):
+    '''Send command to shell.'''
+    subprocess.Popen(['bash', '-c', cmd])
 
-    # Deal with UoA Contents
-    else:
-        string += 'UoA/'
-        subject_directory = {
-            0 : 'ADMIN/',
-            1 : 'BOOKS/',
-            2 : 'BOOKS/2020-S2/CHEMMAT121/',
-            3 : 'BOOKS/2020-S2/ELECTENG101/',
-            4 : 'BOOKS/2020-S2/ENGGEN131/',
-            5 : 'BOOKS/2020-S2/BUSINESS151G/',
-            6 : 'CLUBS/',
-            7 : 'COURSES/',
-            8 : 'COURSES/2020-S2/CHEMMAT121/',
-            9 : 'COURSES/2020-S2/ELECTENG101/',
-            10: 'COURSES/2020-S2/ENGGEN131/',
-            11: 'COURSES/2020-S2/BUSINESS151G/'
-        }
-        string += subject_directory[nav_flag]
+def form_help_doc():
+    '''Return help documenation.'''
+    doc = 'Usage: cdl [options]\n\nOptions:\n'
+    for key in NAV_DIRS:
+        doc += '  {:10} go to ~/Dropbox/{}\n'.format(key, NAV_DIRS[key][1])
+    return doc
 
-        # Auto-Navigate for admin directory
-        if nav_flag in (0,):
-            string = auto_nav(string, 3)
-        
-        # Auto-Navigate for each course
-        elif nav_flag in (8, 9, 10, 11):
-            string = auto_nav(string, 2)
 
-    # Assist the shell in recognising special symbols
-    symbol_fix = (' ', "'", '"', '(', '[', '{', '<', ')', ']', '}', '>', '&')
-    for symbol in symbol_fix:
-        string = recognise_special_symbol(string, symbol)
-
-    return string
-
-def run(flag, nav_flag=-1):
-    '''Carry out the process of navigating to the latest directory based on
-    user's entered arguments. This is the first function called when the program
-    is run in the terminal.'''
-    result = prep_str(flag, nav_flag)
-    to_run = '{} {}'.format(file_manager, result)
-    subprocess.Popen(['bash', '-c', to_run])
-
-def show_help():
-    '''Show the help documentation for the program.'''
-    help_doc = '''Usage: cdl [options] [directories]
-
-Options:
-  -h, --help      show this help message and exit
-  -H, --home      go to the latest directory in ~/Dropbox/HOME/
-  -M, --media     go to ~/Dropbox/Media/
-  -P, --projects  go to the latest directory in ~/Dropbox/Projects/
-  -U  --uni       go to ~/Dropbox/UoA/
-
-Directories (can be called when -n flag is passed into the program):
-  admin    go to the latest directory in ~/Dropbox/UoA/ADMIN/
-  books    go to ~/Dropbox/UoA/BOOKS/
-  151gb    go to ~/Dropbox/UoA/BOOKS/2020-S2/BUSINESS151G/
-  121b     go to ~/Dropbox/UoA/BOOKS/2020-S2/CHEMMAT121/
-  101b     go to ~/Dropbox/UoA/BOOKS/2020-S2/ELECTENG101/
-  131b     go to ~/Dropbox/UoA/BOOKS/2020-S2/ENGGEN131/
-  clubs    go to ~/Dropbox/UoA/CLUBS/
-  courses  go to ~/Dropbox/UoA/COURSES/
-  151g     go to the latest directory in ~/Dropbox/UoA/2020-S2/BUSINESS151G/
-  121      go to the latest directory in ~/Dropbox/UoA/2020-S2/CHEMMAT121/
-  101      go to the latest directory in ~/Dropbox/UoA/2020-S2/ELECTENG101/
-  131      go to the latest directory in ~/Dropbox/UoA/2020-S2/ENGGEN131/'''
-    print(help_doc)
-
+# Main
 if __name__ == '__main__':
     if len(sys.argv) == 2:
-        options = {
-            '-H'        : 0,
-            '--home'    : 0,
-            '-U'        : 1,
-            '--uni'     : 1,
-            '-P'        : 3,
-            '--projects': 3,
-            '-M'        : 4,
-            '--media'   : 4
-        }
-        try:
-            run_flag = options[sys.argv[1]]
-            run(run_flag)
-        except:
-            show_help()
-    elif len(sys.argv) == 3:
-        if sys.argv[1] in ('-n', '--nav'):
-            nav_options = {
-                'admin'   : 0,
-                'books'   : 1,
-                '121b'    : 2,
-                '101b'    : 3,
-                '131b'    : 4,
-                '151gb'   : 5,
-                'clubs'   : 6,
-                'courses' : 7,
-                '121'     : 8,
-                '101'     : 9,
-                '131'     : 10,
-                '151g'    : 11
-            }
-            try:
-                run_nav_flag = nav_options[sys.argv[2]]
-                run(2, run_nav_flag)
-            except:
-                show_help()
+        cmd_param = sys.argv[1]
+        if cmd_param in NAV_DIRS:
+            dir_path = parse_dir_path(cmd_param)
+            command = parse_cmd(dir_path)
+            print('OPENING "{}"'.format(dir_path))
+            run(command)
+        elif cmd_param in ('-h', '--help'):
+            print(form_help_doc())
         else:
-            show_help()
-    else:
-        show_help()
+            print('Argument not supported.')
