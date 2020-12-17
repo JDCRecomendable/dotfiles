@@ -34,7 +34,7 @@ WIN_ORIGIN = (544, 220)
 class MainFrame(wx.Frame):
     def __init__(self):
         # Define main window
-        super().__init__(parent=None, title='Main Menu')
+        super().__init__(parent=None, title='Directory Main Menu')
         panel = wx.Panel(self)
         panel.SetBackgroundColour((0, 0, 0))
         panel.SetForegroundColour((255, 255, 255))
@@ -47,26 +47,33 @@ class MainFrame(wx.Frame):
             container = wx.BoxSizer(wx.HORIZONTAL)
             label = wx.StaticText(panel, label=dir[1])
 
-            # Add button for each directory option
-            button_dir = wx.Button(panel, label='{}'.format(dir[3]))
-            button_dir.Bind(wx.EVT_BUTTON, self.button_press(code=dir[3]))
-
-            # Button also listens for keyboard events if focussed
-            button_dir.Bind(wx.EVT_CHAR, self.key_press)
-
             # Add label for each directory option
             container.Add(label, 1, wx.ALIGN_LEFT | wx.ALIGN_CENTRE_VERTICAL, 0)
 
-            # Add the button for the corresponding books directory, if present
-            if dir[0] == 1:
-                button_books = wx.Button(panel, label='⇧{}'.format(dir[3]))
-                button_books.Bind(wx.EVT_BUTTON, self.button_press(code=dir[4]))
-                button_books.Bind(wx.EVT_CHAR, self.key_press)
-                container.Add(button_books, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
+            # Add buttons if row represents a directory option (row_type > -1)
+            if dir[0] > -1:
+                # Add button for each directory option
+                button_dir = wx.Button(panel, label='OPEN [{}]'.format(dir[3]))
+                button_dir.Bind(wx.EVT_BUTTON, self.button_press(code=dir[3]))
+                button_dir.SetBackgroundColour((0, 128, 0))
+                button_dir.SetForegroundColour((255, 255, 255))
 
-            # Add the button for directory
-            container.Add(button_dir, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
+                # Button also listens for keyboard events if focussed
+                button_dir.Bind(wx.EVT_CHAR, self.key_press)
 
+                # Add the button for the corresponding books directory, if present
+                if dir[0] == 1:
+                    button_books = wx.Button(panel, label='BOOK [⇧{}]'.format(dir[3]))
+                    button_books.Bind(wx.EVT_BUTTON, self.button_press(code=dir[4]))
+                    button_books.Bind(wx.EVT_CHAR, self.key_press)
+                    button_books.SetBackgroundColour((128, 64, 0))
+                    button_books.SetForegroundColour((255, 255, 255))
+                    container.Add(button_books, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
+
+                # Add the button for directory
+                container.Add(button_dir, 0, wx.LEFT | wx.ALIGN_CENTRE_VERTICAL, 8)
+
+            # Add row to window
             container_main.Add(container, 1, wx.EXPAND | wx.ALL, 8)
 
         # Listen to keyboard events
@@ -90,6 +97,8 @@ class MainFrame(wx.Frame):
     def goto_dir(self, code):
         '''Open the intended directory using cdl.'''
         for dir in DIRS:
+            if dir[0] < 0:
+                continue
             if code == ord(dir[3]):
                 Popen(['bash', '-c', COMMAND.format(dir[2])])
                 self.Destroy()
