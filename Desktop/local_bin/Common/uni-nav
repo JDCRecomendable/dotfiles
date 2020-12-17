@@ -13,16 +13,23 @@ DEPENDENCIES
 * wxPython
 '''
 
-# [has_book_dir, label, cdl_command, keycode_binding] OR
-# [has_book_dir, label, cdl_command, keycode_binding, keycode_binding_book]
+# [row_type, label, cdl_command, keycode_binding] OR
+# [row_type, label, cdl_command, keycode_binding, keycode_binding_book]
 DIRS = [
+    [-1, 'SEMESTER 1'],
+    [1, 'S1 / COMPSYS 201', '201', '1', '!'],
+    [1, 'S1 / ENGSCI  211', '211', '2', '@'],
+    [1, 'S1 / SOFTENG 281', '281', '3', '#'],
+    [1, 'S1 / SOFTENG 282', '282', '4', '$'],
+    [-1, '\nSEMESTER 2'],
+    [1, 'S2 / ENGGEN  204', '204', '5', '%'],
+    [1, 'S2 / SOFTENG 206', '206', '6', '^'],
+    [1, 'S2 / SOFTENG 283', '283', '7', '&'],
+    [1, 'S2 / SOFTENG 284', '284', '8', '*'],
+    [-1, '\nMISC'],
     [0, 'ADMIN', 'admin', '0'],
-    [0, 'BUSINESS 151G', '151g', '1', '!'],
-    [1, 'CHEMMAT 121', '121', '2', '@'],
-    [1, 'ELECTENG 101', '101', '3', '#'],
-    [1, 'ENGGEN 131', '131', '4', '$'],
-    [0, 'UoA WORK', 'work', '8'],
-    [0, 'CLUBS', 'clubs', '9']
+    [0, 'UoA WORK', 'work', '-'],
+    [0, 'CLUBS', 'clubs', '9'],
 ]
 
 COMMAND = '~/.local/bin/cdl u-{}'
