@@ -28,8 +28,8 @@ DIRS = [
 COMMAND = '~/.local/bin/cdl u-{}'
 COMMAND_BOOK_DIR = '~/.local/bin/cdl u-{}b'
 
-WIN_SIZE = (360, 360)
-WIN_ORIGIN = (544, 220)
+WIN_SIZE = (640, 864)
+WIN_ORIGIN = (640, 108)
 
 class MainFrame(wx.Frame):
     def __init__(self):
