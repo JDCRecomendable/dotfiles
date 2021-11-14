@@ -136,7 +136,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'End X session?' -b 'EXIT' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -177,39 +177,40 @@ bar {
 
 # user-specified application-launching key bindings
 bindsym $mod+z           exec "gedit --new-window"
-bindsym $mod+Shift+z     exec "codium"
+bindsym $mod+Shift+z     exec "code"
+bindsym $mod+period      exec ".local/bin/uni-nav"
 bindsym $mod+slash       exec "firefox --private-window"
 bindsym $mod+Shift+slash exec "chromium-browser --incognito"
-bindsym $mod+backslash   exec "nautilus -w"
+bindsym $mod+backslash   exec "pcmanfm"
 bindsym $mod+o           exec "libreoffice"
 bindsym $mod+Shift+o     exec "texworks"
 bindsym $mod+m           exec "thunderbird"
+bindsym $mod+n           exec "discord"
 
 # user-specified key bindings for system tasks
 bindsym $mod+l           exec "xscreensaver-command -lock"
 bindsym $mod+p           exec "lxrandr"
-bindsym $mod+F4          exec "shutdown -h now"
-bindsym $mod+F5          exec "shutdown -r now"
+bindsym $mod+Shift+F4    exec "shutdown -h now"
+bindsym $mod+Shift+F5    exec "shutdown -r now"
 bindsym $mod+x           exec "gnome-screenshot -i"
 bindsym $mod+Shift+x     exec "simplescreenrecorder"
-bindsym XF86MonBrightnessDown exec "sudo /home/jdcrecomendable/.local/bin/bri d"
-bindsym XF86MonBrightnessUp   exec "sudo /home/jdcrecomendable/.local/bin/bri u"
+bindsym XF86MonBrightnessDown exec "sudo /home/username/.local/bin/bri d"
+bindsym XF86MonBrightnessUp   exec "sudo /home/username/.local/bin/bri u"
 
 # user-specified key bindings for directories
-bindsym $mod+Mod1+Shift+b exec "nautilus -w /home/jdcrecomendable/Apps"
-bindsym $mod+Mod1+Shift+d exec "nautilus -w /home/jdcrecomendable/Documents"
-bindsym $mod+Mod1+d       exec "nautilus -w /home/jdcrecomendable/Downloads"
-bindsym $mod+Mod1+Shift+p exec "nautilus -w /home/jdcrecomendable/Pictures"
-bindsym $mod+Mod1+Shift+m exec "nautilus -w /home/jdcrecomendable/Music"
-bindsym $mod+Mod1+Shift+v exec "nautilus -w /home/jdcrecomendable/Videos"
+bindsym $mod+Mod1+Shift+b exec "pcmanfm /home/username/Apps"
+bindsym $mod+Mod1+Shift+d exec "pcmanfm /home/username/Documents"
+bindsym $mod+Mod1+d       exec "pcmanfm /home/username/Downloads"
+bindsym $mod+Mod1+Shift+p exec "pcmanfm /home/username/Pictures"
+bindsym $mod+Mod1+Shift+m exec "pcmanfm /home/username/Music"
+bindsym $mod+Mod1+Shift+v exec "pcmanfm /home/username/Videos"
 
 # start-up (also look up /etc/xdg/autostart, if any)
 exec "xpad"
 exec "start-pulseaudio-x11"
-exec --no-startup-id "feh --bg-fill /home/jdcrecomendable/Pictures/Wallpapers/STD_T3_SD.png"
+exec --no-startup-id "feh --bg-fill /home/username/Pictures/Wallpapers/STD_T3_SD.png"
 exec --no-startup-id "xscreensaver -no-splash"
-exec "sleep 3 && redshift-gtk"
+exec "sleep 3 && redshift"
 exec "pasystray"
 exec "blueman-applet"
 exec "numlockx"
-
