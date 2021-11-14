@@ -28,7 +28,8 @@ DIRS = [
     [1, 'S2 / SOFTENG 284', '284', '8', '*'],
     [-1, '\nMISC'],
     [0, 'ADMIN', 'admin', '0'],
-    [0, 'UoA WORK', 'work', '-'],
+    [0, 'UoA COMPETITIONS', 'competitions', '='],
+    [0, 'UoA EXTCURR', 'extcurr', '-'],
     [0, 'CLUBS', 'clubs', '9'],
 ]
 
