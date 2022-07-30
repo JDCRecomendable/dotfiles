@@ -22,35 +22,19 @@ DROPBOX_DIR = '/{}/{}/Dropbox/'.format(HOME_DIR, USERNAME)
 # Structure:
 #     'CMD_PARAM': [AUTO_NAV_DEPTH, 'RELATIVE FILE_LOCATION']
 NAV_DIRS = {
-        # Root Level
-        'u': [0, 'UoA'],
-
-        # Frequent Directories
         'u-admin'        : [3, 'UoA/ADMIN'],
         'u-books'        : [1, 'UoA/BOOKS'],
         'u-clubs'        : [0, 'UoA/CLUBS'],
         'u-competitions' : [2, 'UoA/COMPETITIONS'],
         'u-courses'      : [1, 'UoA/COURSES'],
-        'u-extcurr'      : [0, 'UoA/EXTCURR'],
-        'u-work'         : [1, 'UoA/WORK'],
-        'u-mi2020'       : [2, 'UoA/WORK/2020-SUMMER/UoA Micro-Internship'],
-        'w-b'            : [4, 'Bestcoder'],
-        'u-201b'         : [0, 'UoA/BOOKS/2021-S1/COMPSYS201'],
-        'u-211b'         : [0, 'UoA/BOOKS/2021-S1/ENGSCI211'],
-        'u-281b'         : [0, 'UoA/BOOKS/2021-S1/SOFTENG281'],
-        'u-282b'         : [0, 'UoA/BOOKS/2021-S1/SOFTENG282'],
-        'u-204b'         : [0, 'UoA/BOOKS/2021-S2/ENGGEN204'],
-        'u-206b'         : [0, 'UoA/BOOKS/2021-S2/SOFTENG206'],
-        'u-283b'         : [0, 'UoA/BOOKS/2021-S2/SOFTENG283'],
-        'u-284b'         : [0, 'UoA/BOOKS/2021-S2/SOFTENG284'],
-        'u-201'          : [2, 'UoA/COURSES/2021-S1/COMPSYS201'],
-        'u-211'          : [2, 'UoA/COURSES/2021-S1/ENGSCI211'],
-        'u-281'          : [2, 'UoA/COURSES/2021-S1/SOFTENG281'],
-        'u-282'          : [2, 'UoA/COURSES/2021-S1/SOFTENG282'],
-        'u-204'          : [2, 'UoA/COURSES/2021-S2/ENGGEN204'],
-        'u-206'          : [2, 'UoA/COURSES/2021-S2/SOFTENG206'],
-        'u-283'          : [2, 'UoA/COURSES/2021-S2/SOFTENG283'],
-        'u-284'          : [2, 'UoA/COURSES/2021-S2/SOFTENG284'],
+        'u-extcurr'      : [3, 'UoA/EXTCURR'],
+        'u-w281'         : [0, 'UoA/WORK/SOFTENG281 2022'],
+        'u-w206'         : [0, 'UoA/WORK/SOFTENG206 2022'],
+        'u-wra'          : [0, 'UoA/WORK/RA 2022'],
+        'u-335'          : [2, 'UoA/COURSES/2022-S2/COMPSCI335'],
+        'u-306'          : [2, 'UoA/COURSES/2022-S2/SOFTENG306'],
+        'u-325'          : [2, 'UoA/COURSES/2022-S2/SOFTENG325'],
+        'u-364'          : [2, 'UoA/COURSES/2022-S2/SOFTENG364'],
 }
 
 
