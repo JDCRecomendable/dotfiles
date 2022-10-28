@@ -5,11 +5,8 @@
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk17/Contents/Home
 PATH=$JAVA_HOME/bin:$PATH
 
-# MacPorts Installer addition on 2022-05-17_at_08:51:20: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Added by Toolbox App
-export PATH="$PATH:/Users/jdcr/Library/Application Support/JetBrains/Toolbox/scripts"
+export PATH="$PATH:/Users/username/Library/Application Support/JetBrains/Toolbox/scripts"

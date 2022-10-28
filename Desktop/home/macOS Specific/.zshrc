@@ -25,11 +25,11 @@ CASE_SENSITIVE="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 6
+zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -70,19 +70,21 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-interactive-cd thefuck macos macports zsh-autosuggestions)
+plugins=(git zsh-interactive-cd thefuck macos brew zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export PATH=/Users/username/.local/bin/:$PATH
 export GPG_TTY=$(tty)
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export HOMEBREW_NO_ANALYTICS=1
 ZSH_AUTOSUGGEST_STRATEGY=completion
 export TYPEWRITTEN_COLOR_MAPPINGS="primary:red;secondary:red;accent:black;foreground:black"
 export TYPEWRITTEN_CURSOR="block"
 eval "$(thefuck --alias)"
-source /opt/local/share/fzf/shell/key-bindings.zsh
-source /opt/local/share/fzf/shell/completion.zsh
+eval "$(rbenv init - zsh)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -107,3 +109,4 @@ source /opt/local/share/fzf/shell/completion.zsh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
