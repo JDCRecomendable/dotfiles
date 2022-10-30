@@ -2,7 +2,7 @@
 
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2020 Jared Daniel Carbonell Recomendable.
+# Copyright (c) 2020-2022 Jared Daniel Carbonell Recomendable.
 
 
 from getpass import getuser
@@ -69,10 +69,20 @@ def run(cmd):
 
 def form_help_doc():
     '''Return help documenation.'''
-    doc = 'Usage: cdl [options]\n\nOptions:\n'
+    doc = 'Usage: cdl [-p] [options]\n\nOptions:\n'
     for key in NAV_DIRS:
         doc += '  {:10} go to ~/Dropbox/{}\n'.format(key, NAV_DIRS[key][1])
     return doc
+
+
+def run_cmd(cmd_param, print_only=False):
+    dir_path = parse_dir_path(cmd_param)
+    if print_only:
+        print(dir_path)
+        return
+    command = parse_cmd(dir_path)
+    print('OPENING "{}"'.format(dir_path))
+    run(command)
 
 
 # Main
@@ -80,11 +90,17 @@ if __name__ == '__main__':
     if len(sys.argv) == 2:
         cmd_param = sys.argv[1]
         if cmd_param in NAV_DIRS:
-            dir_path = parse_dir_path(cmd_param)
-            command = parse_cmd(dir_path)
-            print('OPENING "{}"'.format(dir_path))
-            run(command)
-        elif cmd_param in ('-h', '--help'):
+            run_cmd(cmd_param)
+        elif cmd_param in ('-h', '--help', '-p'):
             print(form_help_doc())
         else:
             print('Argument not supported.')
+    elif len(sys.argv) == 3:
+        if sys.argv[1] in NAV_DIRS and sys.argv[2] == '-p':
+            run_cmd(sys.argv[1], True)
+        elif sys.argv[1] == '-p' and sys.argv[2] in NAV_DIRS:
+            run_cmd(sys.argv[2], True)
+        else:
+            print(form_help_doc())
+    else:
+        print(form_help_doc())
