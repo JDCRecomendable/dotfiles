@@ -109,4 +109,4 @@ eval "$(rbenv init - zsh)"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
+alias cdlp='f() { cd "$(cdl -p $1)" };f'
