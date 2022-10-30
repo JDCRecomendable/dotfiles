@@ -16,6 +16,7 @@ FILE_MANAGER_CMD = 'nautilus'
 HOME_DIR = 'home'
 USERNAME = getuser()
 DROPBOX_DIR = '/{}/{}/Dropbox/'.format(HOME_DIR, USERNAME)
+# DROPBOX_DIR = '/{}/{}/Library/CloudStorage/Dropbox/'.format(HOME_DIR, USERNAME)
 
 
 # File locations
