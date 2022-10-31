@@ -105,6 +105,18 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# Function definitions.
+# For "aliases" that take in arguments.
+# Consider adding into a separate file like ~/.bash_aliases or
+# ~/.bash_functions in the future.
+cdlp() {
+    if [ -z "$1" ]; then
+        cdl -h
+    else
+        cd "$(cdl -p $1)";
+    fi
+}
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
