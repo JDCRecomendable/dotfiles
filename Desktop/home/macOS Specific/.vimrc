@@ -9,4 +9,5 @@ call plug#begin()
 Plug 'maralla/completor.vim'
 Plug 'vimsence/vimsence'
 Plug 'preservim/nerdtree'
+Plug 'tpope/vim-fugitive'
 call plug#end()
