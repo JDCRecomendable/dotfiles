@@ -1,5 +1,5 @@
 set nocompatible
-set rtp+=/opt/local/share/fzf/vim
+source /usr/share/doc/fzf/examples/fzf.vim
 filetype plugin on
 set omnifunc=syntaxComplete#Complete
 set number
