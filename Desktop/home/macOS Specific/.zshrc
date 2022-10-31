@@ -110,3 +110,6 @@ eval "$(rbenv init - zsh)"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cdlp='f() { cd "$(cdl -p $1)" };f'
+
+# Add integration with iTerm2
+test -e /Users/username/.iterm2_shell_integration.zsh && source /Users/username/.iterm2_shell_integration.zsh || true
