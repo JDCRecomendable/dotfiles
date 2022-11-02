@@ -48,6 +48,12 @@ class Committer:
         elif action == 'diff':
             self.process_diff()
 
+        elif action == 'mv':
+            self.process_mv()
+
+        elif action == 'cp':
+            self.process_cp()
+
         elif action == 'rm':
             self.process_rm()
 
@@ -209,6 +215,31 @@ class Committer:
         
         os.system(command)
 
+    def process_mv(self):
+        filename = self.args['filename']
+        newname = self.args['newname']
+
+        if not filename in self.data:
+            print(f'ERROR: File not registered at {self.data_filepath}.')
+            sys.exit(1)
+
+        os.rename(filename, newname)
+        self.data[newname] = self.data[filename]
+        self.data.pop(filename)
+        self.save_data()
+
+    def process_cp(self):
+        filename = self.args['filename']
+        newname = self.args['newname']
+
+        if not filename in self.data:
+            print(f'ERROR: File not registered at {self.data_filepath}.')
+            sys.exit(1)
+
+        copyfile(filename, newname)
+        self.data[newname] = self.data[filename]
+        self.save_data()
+
     def process_rm(self):
         filename = self.args['filename']
         is_delete_from_system = self.args['delete_from_system']
@@ -250,6 +281,8 @@ if __name__ == '__main__':
     parser_info = subparsers.add_parser('info', help='Shows information about the concerned file')
     parser_update = subparsers.add_parser('update', help='Update information about the concerned file')
     parser_diff = subparsers.add_parser('diff', help='Displays the difference between the file in the system and this repository')
+    parser_mv = subparsers.add_parser('mv', help='Renames the file of concern in this repository')
+    parser_cp = subparsers.add_parser('cp', help='Copies the file of concern in this repository into another file of concern in this repository')
     parser_rm = subparsers.add_parser('rm', help='Removes the file of concern from this repository')
     
     parser_add.add_argument('filename', help='The file to register to this repository')
@@ -277,6 +310,12 @@ if __name__ == '__main__':
     parser_update.add_argument('-r', '--remove-platforms', action="extend", nargs="+", type=str, help='Removes the one or more existing platforms that the file is supported on')
 
     parser_diff.add_argument('filename', help='The file to compare')
+
+    parser_mv.add_argument('filename', help='The file to rename')
+    parser_mv.add_argument('newname', help='The new name of the file')
+
+    parser_cp.add_argument('filename', help='The file to copy')
+    parser_cp.add_argument('newname', help='The new name of the file to create')
 
     parser_rm.add_argument('filename', help='The file to remove')
     parser_rm.add_argument('-D', '--delete-from-system', action='store_true', help='Also delete the file in the system, if it exists')

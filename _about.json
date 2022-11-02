@@ -1,200 +1,200 @@
 {
     ".bash_profile": {
-        "target_location": "~/.bash_profile",
         "is_in_use": true,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "~/.bash_profile"
     },
     ".bashrc-arch": {
-        "target_location": "~/.bashrc",
         "is_in_use": true,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "~/.bashrc"
     },
     ".bashrc-ubuntu": {
-        "target_location": "~/.bashrc",
         "is_in_use": true,
         "platforms": [
             "Ubuntu"
-        ]
+        ],
+        "target_location": "~/.bashrc"
     },
     ".vimrc-mac": {
-        "target_location": "~/.vimrc",
         "is_in_use": true,
         "platforms": [
             "macOS"
-        ]
+        ],
+        "target_location": "~/.vimrc"
     },
     ".vimrc-ubuntu": {
-        "target_location": "~/.vimrc",
         "is_in_use": true,
         "platforms": [
             "Ubuntu"
-        ]
+        ],
+        "target_location": "~/.vimrc"
     },
     ".xinitrc": {
-        "target_location": "~/.xinitrc",
         "is_in_use": true,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "~/.xinitrc"
     },
     ".zprofile": {
-        "target_location": "~/.zprofile",
         "is_in_use": true,
         "platforms": [
             "macOS"
-        ]
+        ],
+        "target_location": "~/.zprofile"
     },
     ".zshrc": {
-        "target_location": "~/.zshrc",
         "is_in_use": true,
         "platforms": [
             "macOS"
-        ]
+        ],
+        "target_location": "~/.zshrc"
     },
     "bri": {
-        "target_location": "~/.local/bin/bri",
         "is_in_use": true,
         "platforms": [
             "Ubuntu"
-        ]
+        ],
+        "target_location": "~/.local/bin/bri"
     },
     "brightness": {
-        "target_location": "~/.local/bin/brightness",
         "is_in_use": false,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "~/.local/bin/brightness"
     },
     "cdl": {
-        "target_location": "~/.local/bin/cdl",
         "is_in_use": true,
         "platforms": [
             "Arch Linux",
             "macOS",
             "Ubuntu"
-        ]
+        ],
+        "target_location": "~/.local/bin/cdl"
     },
     "graphics": {
-        "target_location": "~/.local/bin/graphics",
         "is_in_use": false,
         "platforms": [
             "Ubuntu"
-        ]
+        ],
+        "target_location": "~/.local/bin/graphics"
     },
     "i3config-arch": {
-        "target_location": "~/.config/i3/config",
         "is_in_use": true,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "~/.config/i3/config"
     },
     "i3config-ubuntu": {
-        "target_location": "~/.config/i3/config",
         "is_in_use": true,
         "platforms": [
             "Ubuntu"
-        ]
+        ],
+        "target_location": "~/.config/i3/config"
     },
     "i3statusconfig-arch": {
-        "target_location": "~/.config/i3status/config",
         "is_in_use": true,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "~/.config/i3status/config"
     },
     "i3statusconfig-ubuntu": {
-        "target_location": "~/.config/i3status/config",
         "is_in_use": true,
         "platforms": [
             "Ubuntu"
-        ]
+        ],
+        "target_location": "~/.config/i3status/config"
     },
     "launch-arch": {
-        "target_location": "~/.local/bin/launch",
         "is_in_use": false,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "~/.local/bin/launch"
     },
     "launch-ubuntu": {
-        "target_location": "~/.local/bin/launch",
         "is_in_use": false,
         "platforms": [
             "Ubuntu"
-        ]
+        ],
+        "target_location": "~/.local/bin/launch"
     },
     "logid.cfg": {
-        "target_location": "/etc/logid.cfg",
         "is_in_use": true,
         "platforms": [
             "Arch Linux",
             "Ubuntu"
-        ]
+        ],
+        "target_location": "/etc/logid.cfg"
     },
     "mkdird": {
-        "target_location": "~/.local/bin/mkdird",
         "is_in_use": true,
         "platforms": [
             "Arch Linux",
             "macOS",
             "Ubuntu"
-        ]
+        ],
+        "target_location": "~/.local/bin/mkdird"
     },
     "motd": {
-        "target_location": "/etc/motd",
         "is_in_use": true,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "/etc/motd"
     },
     "rc.conf": {
-        "target_location": "~/.config/ranger/rc.conf",
         "is_in_use": true,
         "platforms": [
             "Arch Linux",
             "macOS",
             "Ubuntu"
-        ]
+        ],
+        "target_location": "~/.config/ranger/rc.conf"
     },
     "redshift.conf": {
-        "target_location": "~/.config/ranger/redshift.conf",
         "is_in_use": true,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "~/.config/ranger/redshift.conf"
     },
     "toggle-network": {
-        "target_location": "~/.local/bin/toggle-network",
         "is_in_use": false,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "~/.local/bin/toggle-network"
     },
     "toggle-touchpad": {
-        "target_location": "~/.local/bin/toggle-touchpad",
         "is_in_use": false,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "~/.local/bin/toggle-touchpad"
     },
     "uni-nav": {
-        "target_location": "~/.local/bin/uni-nav",
         "is_in_use": true,
         "platforms": [
             "Arch Linux",
             "macOS",
             "Ubuntu"
-        ]
+        ],
+        "target_location": "~/.local/bin/uni-nav"
     },
     "vol": {
-        "target_location": "~/.local/bin/vol",
         "is_in_use": true,
         "platforms": [
             "Arch Linux"
-        ]
+        ],
+        "target_location": "~/.local/bin/vol"
     }
 }
