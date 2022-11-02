@@ -26,22 +26,28 @@ class Committer:
             self.data = loads(data_raw.replace('~', os.path.expanduser('~')))
 
         action = self.args['action']
-    
+
         if action == 'add':
             self.process_add()
-    
+
         elif action == 'import':
             self.process_import()
-    
+
         elif action == 'export':
             self.process_export()
-    
+
+        elif action == 'list':
+            self.process_list()
+
+        elif action == 'info':
+            self.process_info()
+
         elif action == 'diff':
             self.process_diff()
-    
+
         elif action == 'rm':
             self.process_rm()
-    
+
     def save_data(self):
         with open(self.data_filepath, 'w') as f:
             to_write = dumps(self.data, sort_keys=True, indent=4)
@@ -114,6 +120,35 @@ class Committer:
 
         copyfile(filename, filepath)
 
+    def process_list(self):
+        is_verbose = self.args['verbose']
+
+        if not self.data or len(self.data) < 1:
+            print('Nothing to display')
+            sys.exit(0)
+
+        print('DOTFILES:')
+        for filename in self.data:
+            if is_verbose:
+                print()
+            print(f'{filename}')
+            if is_verbose:
+                self._print_about_dotfile(filename)
+
+    def process_info(self):
+        filename = self.args['filename']
+
+        if not filename in self.data:
+            print(f'ERROR: File not registered at {self.data_filepath}.')
+            sys.exit(1)
+
+        if not 'target_location' in self.data[filename] or not 'is_in_use' in self.data[filename] or not 'platforms' in self.data[filename]:
+            print(f'ERROR: Possibly malformed {self.data_filepath}.')
+            sys.exit(1)
+
+        print(f'DOTFILE: {filename}')
+        self._print_about_dotfile(filename)
+
     def process_diff(self):
         filename = self.args['filename']
 
@@ -148,6 +183,13 @@ class Committer:
         self.data.pop(filename)
         self.save_data()
 
+    def _print_about_dotfile(self, filename):
+        print('    Target Location  : {}'.format(self.data[filename]['target_location']))
+        print('    Is in Active Use?: {}'.format(self.data[filename]['is_in_use']))
+        print('    Platforms:')
+        for platform in self.data[filename]['platforms']:
+            print(f'    *   {platform}')
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -160,6 +202,8 @@ if __name__ == '__main__':
     parser_add = subparsers.add_parser('add', help='Registers a new file to be tracked into this repository')
     parser_import = subparsers.add_parser('import', help='Copies concerned file from the system to this repository')
     parser_export = subparsers.add_parser('export', help='Copies concerned file from this repository to the system')
+    parser_list = subparsers.add_parser('list', help='Shows all files being tracked by this repository')
+    parser_info = subparsers.add_parser('info', help='Shows information about the concerned file')
     parser_diff = subparsers.add_parser('diff', help='Displays the difference between the file in the system and this repository')
     parser_rm = subparsers.add_parser('rm', help='Removes the file of concern from this repository')
     
@@ -174,9 +218,13 @@ if __name__ == '__main__':
     parser_export.add_argument('-p', '--filepath', help='Exports the concerned file to the specified FILEPATH instead of the original target filepath')
     parser_export.add_argument('-b', '--backup', action='store_true', help='Duplicates the existing file in the system, so that the duplicate has ".backup" appended')
     parser_export.add_argument('-i', '--imported', action='store_true', help='Appends ".imported" to the end of the filename of the file being exported to the system')
-    
+
+    parser_list.add_argument('-v', '--verbose', action="store_true", help='Shows information about files as they are listed')
+
+    parser_info.add_argument('filename', help='The file to show information on')
+
     parser_diff.add_argument('filename', help='The file to compare')
-    
+
     parser_rm.add_argument('filename', help='The file to remove')
     parser_rm.add_argument('-D', '--delete-from-system', action='store_true', help='Also delete the file in the system, if it exists')
 
