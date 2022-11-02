@@ -1,0 +1,183 @@
+#!/usr/bin/env python3
+
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2020-2022 Jared Daniel Carbonell Recomendable.
+
+
+from pathlib import Path
+from json import dumps, loads
+from shutil import copyfile
+import argparse
+import sys
+import os
+
+
+class Committer:
+    def __init__(self, data_filepath, args):
+        self.args = args
+        self.data_filepath = data_filepath
+        self.data = None
+        if not Path(data_filepath).is_file():
+            with open(data_filepath, 'w') as f:
+                f.write('{}\n')
+        with open(data_filepath, 'r') as f:
+            data_raw = f.read()
+            self.data = loads(data_raw.replace('~', os.path.expanduser('~')))
+
+        action = self.args['action']
+    
+        if action == 'add':
+            self.process_add()
+    
+        elif action == 'import':
+            self.process_import()
+    
+        elif action == 'export':
+            self.process_export()
+    
+        elif action == 'diff':
+            self.process_diff()
+    
+        elif action == 'rm':
+            self.process_rm()
+    
+    def save_data(self):
+        with open(self.data_filepath, 'w') as f:
+            to_write = dumps(self.data, sort_keys=True, indent=4)
+            f.write(to_write.replace(os.path.expanduser('~'), '~') + '\n')
+
+    def process_add(self):
+        filename = self.args['filename']
+        target_location = self.args['target-location']
+        platforms = self.args['platforms']
+
+        if not Path(target_location).is_file():
+            print('ERROR: File at target location does not exist.')
+            sys.exit(1)
+
+        if not Path(filename).is_file():
+            copyfile(target_location, filename)
+
+        value = {
+            'target_location': target_location,
+            'is_in_use': True,
+            'platforms': platforms
+        }
+
+        self.data[filename] = value
+        self.save_data()
+
+    def process_import(self):
+        filename = self.args['filename']
+        custom_filename = self.args['custom_filename']
+        
+        if not filename in self.data:
+            print(f'ERROR: File not registered at {self.data_filepath}.')
+            sys.exit(1)
+
+        if not 'target_location' in self.data[filename]:
+            print(f'ERROR: Possibly malformed {self.data_filepath}.')
+            sys.exit(1)
+
+        if custom_filename:
+            copyfile(self.data[filename]['target_location'], custom_filename)
+            self.data[custom_filename] = self.data[filename]
+            self.save_data()
+        else:
+            copyfile(self.data[filename]['target_location'], filename)
+
+    def process_export(self):
+        filename = self.args['filename']
+        filepath = self.args['filepath']
+        is_backup = self.args['backup']
+        is_imported = self.args['imported']
+        
+        if not filename in self.data:
+            print(f'ERROR: File not registered at {self.data_filepath}.')
+            sys.exit(1)
+
+        if not 'target_location' in self.data[filename]:
+            print(f'ERROR: Possibly malformed {self.data_filepath}.')
+            sys.exit(1)
+
+        location_at_system = self.data[filename]['target_location']
+
+        if is_backup:
+            copyfile(location_at_system, f'{location_at_system}.backup')
+
+        if filepath is None:
+            filepath = location_at_system
+        
+        if is_imported:
+            filepath += '.imported'
+
+        copyfile(filename, filepath)
+
+    def process_diff(self):
+        filename = self.args['filename']
+
+        if not filename in self.data:
+            print(f'ERROR: File not registered at {self.data_filepath}.')
+            sys.exit(1)
+
+        if not 'target_location' in self.data[filename]:
+            print(f'ERROR: Possibly malformed {self.data_filepath}.')
+            sys.exit(1)
+
+        location_at_system = self.data[filename]['target_location']
+        command = f'diff {location_at_system} {filename}'
+        
+        os.system(command)
+
+    def process_rm(self):
+        filename = self.args['filename']
+        is_delete_from_system = self.args['delete_from_system']
+
+        if not filename in self.data:
+            print(f'ERROR: File not registered at {self.data_filepath}.')
+            sys.exit(1)
+        
+        if is_delete_from_system:
+            if not 'target_location' in self.data[filename]:
+                print(f'ERROR: Possibly malformed {self.data_filepath}.')
+                sys.exit(1)
+            os.remove(self.data[filename]['target_location'])
+
+        os.remove(filename)
+        self.data.pop(filename)
+        self.save_data()
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        prog='committer',
+        description='Copies dot files to and from the system.'
+    )
+
+    subparsers = parser.add_subparsers(title='actions', dest='action', description='Main action to take on the concerned file', required=True)
+    
+    parser_add = subparsers.add_parser('add', help='Registers a new file to be tracked into this repository')
+    parser_import = subparsers.add_parser('import', help='Copies concerned file from the system to this repository')
+    parser_export = subparsers.add_parser('export', help='Copies concerned file from this repository to the system')
+    parser_diff = subparsers.add_parser('diff', help='Displays the difference between the file in the system and this repository')
+    parser_rm = subparsers.add_parser('rm', help='Removes the file of concern from this repository')
+    
+    parser_add.add_argument('filename', help='The file to register to this repository')
+    parser_add.add_argument('target-location', help='The concerned file location in the system')
+    parser_add.add_argument('platforms', action="extend", nargs="+", type=str, help='The platforms that the file will be supported on')
+
+    parser_import.add_argument('filename', help='The file to copy from the system to this repository')
+    parser_import.add_argument('-c', '--custom-filename', help='Imports the concerned file as a new file to this repository with CUSTOM_FILENAME as the filename')
+
+    parser_export.add_argument('filename', help='The file to copy from this repository to the system')
+    parser_export.add_argument('-p', '--filepath', help='Exports the concerned file to the specified FILEPATH instead of the original target filepath')
+    parser_export.add_argument('-b', '--backup', action='store_true', help='Duplicates the existing file in the system, so that the duplicate has ".backup" appended')
+    parser_export.add_argument('-i', '--imported', action='store_true', help='Appends ".imported" to the end of the filename of the file being exported to the system')
+    
+    parser_diff.add_argument('filename', help='The file to compare')
+    
+    parser_rm.add_argument('filename', help='The file to remove')
+    parser_rm.add_argument('-D', '--delete-from-system', action='store_true', help='Also delete the file in the system, if it exists')
+
+    Committer('_data.json', vars(parser.parse_args()))
