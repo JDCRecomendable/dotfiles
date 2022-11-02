@@ -85,6 +85,34 @@
             "Ubuntu"
         ]
     },
+    "i3config-arch": {
+        "target_location": "~/.config/i3/config",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux"
+        ]
+    },
+    "i3config-ubuntu": {
+        "target_location": "~/.config/i3/config",
+        "is_in_use": true,
+        "platforms": [
+            "Ubuntu"
+        ]
+    },
+    "i3statusconfig-arch": {
+        "target_location": "~/.config/i3status/config",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux"
+        ]
+    },
+    "i3statusconfig-ubuntu": {
+        "target_location": "~/.config/i3status/config",
+        "is_in_use": true,
+        "platforms": [
+            "Ubuntu"
+        ]
+    },
     "launch-arch": {
         "target_location": "~/.local/bin/launch",
         "is_in_use": false,
@@ -118,6 +146,22 @@
     },
     "motd": {
         "target_location": "/etc/motd",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux"
+        ]
+    },
+    "rc.conf": {
+        "target_location": "~/.config/ranger/rc.conf",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux",
+            "macOS",
+            "Ubuntu"
+        ]
+    },
+    "redshift.conf": {
+        "target_location": "~/.config/ranger/redshift.conf",
         "is_in_use": true,
         "platforms": [
             "Arch Linux"
