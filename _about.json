@@ -1,4 +1,60 @@
 {
+    ".bash_profile": {
+        "target_location": "~/.bash_profile",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux"
+        ]
+    },
+    ".bashrc-arch": {
+        "target_location": "~/.bashrc",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux"
+        ]
+    },
+    ".bashrc-ubuntu": {
+        "target_location": "~/.bashrc",
+        "is_in_use": true,
+        "platforms": [
+            "Ubuntu"
+        ]
+    },
+    ".vimrc-mac": {
+        "target_location": "~/.vimrc",
+        "is_in_use": true,
+        "platforms": [
+            "macOS"
+        ]
+    },
+    ".vimrc-ubuntu": {
+        "target_location": "~/.vimrc",
+        "is_in_use": true,
+        "platforms": [
+            "Ubuntu"
+        ]
+    },
+    ".xinitrc": {
+        "target_location": "~/.xinitrc",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux"
+        ]
+    },
+    ".zprofile": {
+        "target_location": "~/.zprofile",
+        "is_in_use": true,
+        "platforms": [
+            "macOS"
+        ]
+    },
+    ".zshrc": {
+        "target_location": "~/.zshrc",
+        "is_in_use": true,
+        "platforms": [
+            "macOS"
+        ]
+    },
     "bri": {
         "target_location": "~/.local/bin/bri",
         "is_in_use": true,
