@@ -42,6 +42,9 @@ class Committer:
         elif action == 'info':
             self.process_info()
 
+        elif action == 'update':
+            self.process_update()
+
         elif action == 'diff':
             self.process_diff()
 
@@ -149,6 +152,47 @@ class Committer:
         print(f'DOTFILE: {filename}')
         self._print_about_dotfile(filename)
 
+    def process_update(self):
+        filename = self.args['filename']
+        target_location = self.args['target_location']
+        deprecate = self.args['deprecate']
+        undeprecate = self.args['undeprecate']
+        platforms = self.args['platforms']
+        platforms_to_add = self.args['add_platforms']
+        platforms_to_remove = self.args['remove_platforms']
+
+        if not filename in self.data:
+            print(f'ERROR: File not registered at {self.data_filepath}.')
+            sys.exit(1)
+
+        if target_location is not None:
+            self.data[filename]['target_location'] = target_location
+
+        if deprecate and undeprecate:
+            print(f'ERROR: Cannot decide whether to deprecate or set active the concerned file.')
+            sys.exit(1)
+
+        if deprecate:
+            self.data[filename]['is_in_use'] = False
+
+        if undeprecate:
+            self.data[filename]['is_in_use'] = True
+
+        if platforms is not None:
+            self.data[filename]['platforms'] = platforms
+
+        if platforms_to_add is not None:
+            for platform in platforms_to_add:
+                if platform not in self.data[filename]['platforms']:
+                    self.data[filename]['platforms'].append(platform)
+
+        if platforms_to_remove is not None:
+            for platform in platforms_to_remove:
+                if platform in self.data[filename]['platforms']:
+                    self.data[filename]['platforms'].remove(platform)
+
+        self.save_data()
+
     def process_diff(self):
         filename = self.args['filename']
 
@@ -204,6 +248,7 @@ if __name__ == '__main__':
     parser_export = subparsers.add_parser('export', help='Copies concerned file from this repository to the system')
     parser_list = subparsers.add_parser('list', help='Shows all files being tracked by this repository')
     parser_info = subparsers.add_parser('info', help='Shows information about the concerned file')
+    parser_update = subparsers.add_parser('update', help='Update information about the concerned file')
     parser_diff = subparsers.add_parser('diff', help='Displays the difference between the file in the system and this repository')
     parser_rm = subparsers.add_parser('rm', help='Removes the file of concern from this repository')
     
@@ -222,6 +267,14 @@ if __name__ == '__main__':
     parser_list.add_argument('-v', '--verbose', action="store_true", help='Shows information about files as they are listed')
 
     parser_info.add_argument('filename', help='The file to show information on')
+
+    parser_update.add_argument('filename', help='The file to update information on')
+    parser_update.add_argument('-t', '--target-location', help='Sets the new concerned file location in the system')
+    parser_update.add_argument('-d', '--deprecate', action='store_true', help='Sets the concerned file to be no longer active')
+    parser_update.add_argument('-u', '--undeprecate', action='store_true', help='Sets the concerned file to be active')
+    parser_update.add_argument('-p', '--platforms', action="extend", nargs="+", type=str, help='Sets the new platforms that the file will be supported on')
+    parser_update.add_argument('-a', '--add-platforms', action="extend", nargs="+", type=str, help='Adds the one or more new platforms specified that the file will be supported on')
+    parser_update.add_argument('-r', '--remove-platforms', action="extend", nargs="+", type=str, help='Removes the one or more existing platforms that the file is supported on')
 
     parser_diff.add_argument('filename', help='The file to compare')
 
