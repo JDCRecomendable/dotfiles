@@ -1,0 +1,85 @@
+{
+    "bri": {
+        "target_location": "~/.local/bin/bri",
+        "is_in_use": true,
+        "platforms": [
+            "Ubuntu"
+        ]
+    },
+    "brightness": {
+        "target_location": "~/.local/bin/brightness",
+        "is_in_use": false,
+        "platforms": [
+            "Arch Linux"
+        ]
+    },
+    "cdl": {
+        "target_location": "~/.local/bin/cdl",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux",
+            "macOS",
+            "Ubuntu"
+        ]
+    },
+    "graphics": {
+        "target_location": "~/.local/bin/graphics",
+        "is_in_use": false,
+        "platforms": [
+            "Ubuntu"
+        ]
+    },
+    "launch-arch": {
+        "target_location": "~/.local/bin/launch",
+        "is_in_use": false,
+        "platforms": [
+            "Arch Linux"
+        ]
+    },
+    "launch-ubuntu": {
+        "target_location": "~/.local/bin/launch",
+        "is_in_use": false,
+        "platforms": [
+            "Ubuntu"
+        ]
+    },
+    "mkdird": {
+        "target_location": "~/.local/bin/mkdird",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux",
+            "macOS",
+            "Ubuntu"
+        ]
+    },
+    "toggle-network": {
+        "target_location": "~/.local/bin/toggle-network",
+        "is_in_use": false,
+        "platforms": [
+            "Arch Linux"
+        ]
+    },
+    "toggle-touchpad": {
+        "target_location": "~/.local/bin/toggle-touchpad",
+        "is_in_use": false,
+        "platforms": [
+            "Arch Linux"
+        ]
+    },
+    "uni-nav": {
+        "target_location": "~/.local/bin/uni-nav",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux",
+            "macOS",
+            "Ubuntu"
+        ]
+    },
+    "vol": {
+        "target_location": "~/.local/bin/vol",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux"
+        ]
+    }
+}
