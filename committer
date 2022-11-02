@@ -131,6 +131,9 @@ class Committer:
 
     def process_list(self):
         is_verbose = self.args['verbose']
+        filter_by_filename = self.args['filter_by_filename']
+        filter_by_target_location = self.args['filter_by_target_location']
+        filter_by_platform = self.args['filter_by_platform']
 
         if not self.data or len(self.data) < 1:
             print('Nothing to display')
@@ -138,11 +141,23 @@ class Committer:
 
         print('DOTFILES:')
         for filename in self.data:
-            if is_verbose:
-                print()
-            print(f'{filename}')
-            if is_verbose:
-                self._print_about_dotfile(filename)
+            to_print = True
+
+            if filter_by_filename is not None and filter_by_filename not in filename:
+                continue
+
+            if filter_by_target_location is not None and filter_by_target_location not in self.data[filename]['target_location']:
+                continue
+
+            if filter_by_platform is not None and not set(filter_by_platform) & set(self.data[filename]['platforms']):
+                continue
+
+            if to_print:
+                if is_verbose:
+                    print()
+                print(f'{filename}')
+                if is_verbose:
+                    self._print_about_dotfile(filename)
 
     def process_info(self):
         filename = self.args['filename']
@@ -298,6 +313,9 @@ if __name__ == '__main__':
     parser_export.add_argument('-i', '--imported', action='store_true', help='Appends ".imported" to the end of the filename of the file being exported to the system')
 
     parser_list.add_argument('-v', '--verbose', action="store_true", help='Shows information about files as they are listed')
+    parser_list.add_argument('-f', '--filter-by-filename', help='Lists files that contain FILTER_BY_NAME')
+    parser_list.add_argument('-t', '--filter-by-target-location', help="Lists files whose target locations contain FILTER_BY_TARGET_LOCATION")
+    parser_list.add_argument('-p', '--filter-by-platform', action="extend", nargs="+", type=str, help='Filters by one or more platforms specified, exact keyword and case-sensitive')
 
     parser_info.add_argument('filename', help='The file to show information on')
 
