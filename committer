@@ -281,4 +281,4 @@ if __name__ == '__main__':
     parser_rm.add_argument('filename', help='The file to remove')
     parser_rm.add_argument('-D', '--delete-from-system', action='store_true', help='Also delete the file in the system, if it exists')
 
-    Committer('_data.json', vars(parser.parse_args()))
+    Committer('_about.json', vars(parser.parse_args()))

@@ -43,6 +43,14 @@
             "Ubuntu"
         ]
     },
+    "logid.cfg": {
+        "target_location": "/etc/logid.cfg",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux",
+            "Ubuntu"
+        ]
+    },
     "mkdird": {
         "target_location": "~/.local/bin/mkdird",
         "is_in_use": true,
@@ -50,6 +58,13 @@
             "Arch Linux",
             "macOS",
             "Ubuntu"
+        ]
+    },
+    "motd": {
+        "target_location": "/etc/motd",
+        "is_in_use": true,
+        "platforms": [
+            "Arch Linux"
         ]
     },
     "toggle-network": {
