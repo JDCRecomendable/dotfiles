@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+[ -d $HOME/.oh-my-zsh ] && export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -70,20 +70,30 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-interactive-cd thefuck macos brew zsh-autosuggestions)
+if [ -n "$(uname -a | grep Ubuntu)" ]; then
+    plugins=(git zsh-interactive-cd thefuck ubuntu brew zsh-autosuggestions)
+elif [ -n "$(uname -a | grep Darwin)" ]; then
+    plugins=(git zsh-interactive-cd thefuck macos brew zsh-autosuggestions)
+else
+    plugins=(git zsh-interactive-cd thefuck brew zsh-autosuggestions)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH=/Users/username/.local/bin/:$PATH
+[ -d $HOME/gems/bin ] && export PATH=$HOME/gems/bin/:$PATH
+[ -d $HOME/gems ] && export GEM_HOME="$HOME/gems"
+[ -d $HOME/.local/bin ] && export PATH=$HOME/.local/bin/:$PATH
 export GPG_TTY=$(tty)
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export HOMEBREW_NO_ANALYTICS=1
 ZSH_AUTOSUGGEST_STRATEGY=completion
 export TYPEWRITTEN_COLOR_MAPPINGS="primary:red;secondary:red;accent:black;foreground:black"
 export TYPEWRITTEN_CURSOR="block"
-eval "$(thefuck --alias)"
-eval "$(rbenv init - zsh)"
+command -v thefuck &> /dev/null && eval "$(thefuck --alias)"
+command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -109,7 +119,7 @@ eval "$(rbenv init - zsh)"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias cdlp='f() { cd "$(cdl -p $1)" };f'
+command -v cdl &> /dev/null && alias cdlp='f() { cd "$(cdl -p $1)" };f'
 
 # Add integration with iTerm2
-test -e /Users/username/.iterm2_shell_integration.zsh && source /Users/username/.iterm2_shell_integration.zsh || true
+[ -e $HOME/.iterm2_shell_integration.zsh ] && source $HOME/.iterm2_shell_integration.zsh || true
