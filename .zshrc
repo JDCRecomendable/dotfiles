@@ -71,11 +71,11 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 if [ -n "$(uname -a | grep Ubuntu)" ]; then
-    plugins=(git zsh-interactive-cd thefuck ubuntu brew zsh-autosuggestions)
+    plugins=(git zsh-interactive-cd thefuck python fzf tig vscode ubuntu systemd ufw zsh-autosuggestions)
 elif [ -n "$(uname -a | grep Darwin)" ]; then
-    plugins=(git zsh-interactive-cd thefuck macos brew zsh-autosuggestions)
+    plugins=(git zsh-interactive-cd thefuck python fzf tig vscode macos brew textmate zsh-autosuggestions)
 else
-    plugins=(git zsh-interactive-cd thefuck brew zsh-autosuggestions)
+    plugins=(git zsh-interactive-cd thefuck python fzf tig vscode zsh-autosuggestions)
 fi
 
 source $ZSH/oh-my-zsh.sh
