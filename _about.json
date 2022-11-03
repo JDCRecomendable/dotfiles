@@ -20,14 +20,7 @@
         ],
         "target_location": "~/.bashrc"
     },
-    ".vimrc-mac": {
-        "is_in_use": true,
-        "platforms": [
-            "macOS"
-        ],
-        "target_location": "~/.vimrc"
-    },
-    ".vimrc-ubuntu": {
+    ".vimrc": {
         "is_in_use": true,
         "platforms": [
             "Ubuntu"
