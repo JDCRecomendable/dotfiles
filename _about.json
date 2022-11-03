@@ -51,7 +51,8 @@
     ".zshrc": {
         "is_in_use": true,
         "platforms": [
-            "macOS"
+            "macOS",
+            "Ubuntu"
         ],
         "target_location": "~/.zshrc"
     },
@@ -112,6 +113,13 @@
             "Ubuntu"
         ],
         "target_location": "~/.config/i3status/config"
+    },
+    "kitty.conf": {
+        "is_in_use": true,
+        "platforms": [
+            "Ubuntu"
+        ],
+        "target_location": "~/.config/kitty/kitty.conf"
     },
     "launch-arch": {
         "is_in_use": false,
