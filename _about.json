@@ -57,7 +57,7 @@
         "target_location": "~/.zshrc"
     },
     "bri": {
-        "is_in_use": true,
+        "is_in_use": false,
         "platforms": [
             "Ubuntu"
         ],
@@ -94,7 +94,7 @@
         "target_location": "~/.config/i3/config"
     },
     "i3config-ubuntu": {
-        "is_in_use": true,
+        "is_in_use": false,
         "platforms": [
             "Ubuntu"
         ],
@@ -108,7 +108,7 @@
         "target_location": "~/.config/i3status/config"
     },
     "i3statusconfig-ubuntu": {
-        "is_in_use": true,
+        "is_in_use": false,
         "platforms": [
             "Ubuntu"
         ],
