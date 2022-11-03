@@ -152,6 +152,13 @@
         ],
         "target_location": "/etc/motd"
     },
+    "nautilus-open-any-terminal-schema.gschema.xml": {
+        "is_in_use": true,
+        "platforms": [
+            "Ubuntu"
+        ],
+        "target_location": "/usr/share/glib-2.0/schemas/com.github.stunkymonkey.nautilus-open-any-terminal.gschema.xml"
+    },
     "rc.conf": {
         "is_in_use": true,
         "platforms": [
