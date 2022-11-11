@@ -95,6 +95,7 @@ command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
