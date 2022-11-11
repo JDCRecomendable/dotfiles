@@ -119,13 +119,19 @@ class Committer:
         location_at_system = self.data[filename]['target_location']
 
         if is_backup:
-            copyfile(location_at_system, f'{location_at_system}.backup')
+            try:
+                copyfile(location_at_system, f'{location_at_system}.backup')
+            except FileNotFoundError:
+                print(f'WARNING: {location_at_system} does not exist. No backup made.')
 
         if filepath is None:
             filepath = location_at_system
         
         if is_imported:
             filepath += '.imported'
+
+        last_index = len(filepath) - len(filepath.split('/')[-1])
+        Path(filepath[:last_index]).mkdir(parents=True, exist_ok=True)
 
         copyfile(filename, filepath)
 
