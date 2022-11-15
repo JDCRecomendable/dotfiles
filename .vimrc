@@ -16,4 +16,5 @@ Plug 'maralla/completor.vim'
 Plug 'vimsence/vimsence'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 call plug#end()
