@@ -74,6 +74,8 @@ if [ -n "$(uname -a | grep Ubuntu)" ]; then
     plugins=(git zsh-interactive-cd thefuck python fzf tig vscode ubuntu systemd ufw zsh-autosuggestions)
 elif [ -n "$(uname -a | grep Darwin)" ]; then
     plugins=(git zsh-interactive-cd thefuck python fzf tig vscode macos brew textmate zsh-autosuggestions)
+elif [ -f /etc/fedora-release ]; then
+    plugins=(git zsh-interactive-cd thefuck python fzf tig vscode systemd ufw zsh-autosuggestions)
 else
     plugins=(git zsh-interactive-cd thefuck python fzf tig vscode zsh-autosuggestions)
 fi
@@ -95,6 +97,7 @@ command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/share/fzf/shell/key-bindings.zsh ] && source /usr/share/fzf/shell/key-bindings.zsh
 [ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found
 
 # export MANPATH="/usr/local/man:$MANPATH"
