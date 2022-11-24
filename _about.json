@@ -23,7 +23,8 @@
     ".vimrc": {
         "is_in_use": true,
         "platforms": [
-            "Ubuntu"
+            "Ubuntu",
+            "Fedora"
         ],
         "target_location": "~/.vimrc"
     },
@@ -45,7 +46,8 @@
         "is_in_use": true,
         "platforms": [
             "macOS",
-            "Ubuntu"
+            "Ubuntu",
+            "Fedora"
         ],
         "target_location": "~/.zshrc"
     },
@@ -68,9 +70,17 @@
         "platforms": [
             "Arch Linux",
             "macOS",
-            "Ubuntu"
+            "Ubuntu",
+            "Fedora"
         ],
         "target_location": "~/.local/bin/cdl"
+    },
+    "dnf.conf": {
+        "is_in_use": true,
+        "platforms": [
+            "Fedora"
+        ],
+        "target_location": "/etc/dnf/dnf.conf"
     },
     "graphics": {
         "is_in_use": false,
@@ -110,7 +120,8 @@
     "kitty.conf": {
         "is_in_use": true,
         "platforms": [
-            "Ubuntu"
+            "Ubuntu",
+            "Fedora"
         ],
         "target_location": "~/.config/kitty/kitty.conf"
     },
@@ -132,7 +143,8 @@
         "is_in_use": true,
         "platforms": [
             "Arch Linux",
-            "Ubuntu"
+            "Ubuntu",
+            "Fedora"
         ],
         "target_location": "/etc/logid.cfg"
     },
@@ -141,7 +153,8 @@
         "platforms": [
             "Arch Linux",
             "macOS",
-            "Ubuntu"
+            "Ubuntu",
+            "Fedora"
         ],
         "target_location": "~/.local/bin/mkdird"
     },
@@ -164,7 +177,8 @@
         "platforms": [
             "Arch Linux",
             "macOS",
-            "Ubuntu"
+            "Ubuntu",
+            "Fedora"
         ],
         "target_location": "~/.config/ranger/rc.conf"
     },
@@ -194,7 +208,8 @@
         "platforms": [
             "Arch Linux",
             "macOS",
-            "Ubuntu"
+            "Ubuntu",
+            "Fedora"
         ],
         "target_location": "~/.local/bin/uni-nav"
     },
