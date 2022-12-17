@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Thonny
+StartupWMClass=thonny
+Comment=A simple and educational Python IDE for beginners.
+GenericName=Python IDLE
+Exec=/home/username/Apps/Thonny/run %f
+Icon=/home/username/Apps/Thonny/thonny.png
+Type=Application
+Categories=Development;Education;IDE;
+MimeType=text/x-python;
+Path=/home/username

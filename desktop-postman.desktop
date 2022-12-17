@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Postman
+StartupWMClass=postman
+Comment=An API platform for building and using APIs.
+GenericName=Postman
+Exec=/home/username/Apps/Postman/Postman
+Icon=/home/username/Apps/Postman/postman.png
+Type=Application
+Categories=Development;Network;WebDevelopment;
+Path=/home/username

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Draw.IO
+StartupWMClass=drawio
+Comment=Open-source diagrams maker.
+GenericName=Diagrams
+Exec=/home/username/Apps/DrawIO/run %f
+Icon=/home/username/Apps/DrawIO/drawio.png
+Type=Application
+Categories=Graphics;Office;GUIDesigner;FlowChart;2DGraphics;VectorGraphics;Publishing;
+MimeType=application/x-extension-drawio
+Path=/home/username

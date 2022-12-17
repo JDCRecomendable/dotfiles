@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Dropbox
+StartupWMClass=dropbox
+Comment=Cloud storage for Linux, Mac and Windows.
+GenericName=Cloud Storage
+Exec=/home/username/Apps/Dropbox/run
+Icon=/home/username/Apps/Dropbox/dropbox.png
+Type=Application
+Categories=Network;FileTools;
+Path=/home/username

@@ -75,6 +75,48 @@
         ],
         "target_location": "~/.local/bin/cdl"
     },
+    "desktop-discord.desktop": {
+        "is_in_use": true,
+        "platforms": [
+            "Fedora"
+        ],
+        "target_location": "~/.local/share/applications/discord.desktop"
+    },
+    "desktop-drawio.desktop": {
+        "is_in_use": true,
+        "platforms": [
+            "Fedora"
+        ],
+        "target_location": "~/.local/share/applications/drawio.desktop"
+    },
+    "desktop-dropbox.desktop": {
+        "is_in_use": true,
+        "platforms": [
+            "Fedora"
+        ],
+        "target_location": "~/.local/share/applications/dropbox.desktop"
+    },
+    "desktop-lanxchange.desktop": {
+        "is_in_use": true,
+        "platforms": [
+            "Fedora"
+        ],
+        "target_location": "~/.local/share/applications/lanxchange.desktop"
+    },
+    "desktop-postman.desktop": {
+        "is_in_use": true,
+        "platforms": [
+            "Fedora"
+        ],
+        "target_location": "~/.local/share/applications/postman.desktop"
+    },
+    "desktop-thonny.desktop": {
+        "is_in_use": true,
+        "platforms": [
+            "Fedora"
+        ],
+        "target_location": "~/.local/share/applications/thonny.desktop"
+    },
     "dnf.conf": {
         "is_in_use": true,
         "platforms": [
@@ -147,6 +189,13 @@
             "Fedora"
         ],
         "target_location": "/etc/logid.cfg"
+    },
+    "mime-x-extension-drawio.xml": {
+        "is_in_use": true,
+        "platforms": [
+            "Fedora"
+        ],
+        "target_location": "~/.local/share/mime/packages/user-extension-drawio.xml"
     },
     "mkdird": {
         "is_in_use": true,

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=LanXchange
+StartupWMClass=lanxchange
+Comment=File transfers over the network made easy.
+GenericName=File Transfer
+Exec=/home/username/Apps/LanXchange/lxc
+Icon=/home/username/Apps/LanXchange/img/logo.png
+Type=Application
+Categories=Network;FileTools;
+Path=/home/username
