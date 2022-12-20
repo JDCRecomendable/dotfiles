@@ -221,13 +221,19 @@
         ],
         "target_location": "/usr/share/glib-2.0/schemas/com.github.stunkymonkey.nautilus-open-any-terminal.gschema.xml"
     },
-    "rc.conf": {
+    "rc-with-kitty-images.conf": {
         "is_in_use": true,
         "platforms": [
             "Arch Linux",
-            "macOS",
-            "Ubuntu",
             "Fedora"
+        ],
+        "target_location": "~/.config/ranger/rc.conf"
+    },
+    "rc.conf": {
+        "is_in_use": true,
+        "platforms": [
+            "macOS",
+            "Ubuntu"
         ],
         "target_location": "~/.config/ranger/rc.conf"
     },
