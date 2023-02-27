@@ -2,7 +2,7 @@
 # Note that commands in .zprofile execute first before commands
 # in .zshrc, assuming that the shell is both a login and an
 # interactive shell.
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk17/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.2.jdk/Contents/Home
 PATH=$JAVA_HOME/bin:$PATH
 
 # Set PATH, MANPATH, etc., for Homebrew.
