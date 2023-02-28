@@ -84,8 +84,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 [ -d $HOME/gems/bin ] && export PATH=$HOME/gems/bin/:$PATH
-[ -d $HOME/gems ] && export GEM_HOME="$HOME/gems"
 [ -d $HOME/.local/bin ] && export PATH=$HOME/.local/bin/:$PATH
+[ -d /opt/homebrew/opt/node@18/bin ] && export PATH=/opt/homebrew/opt/node@18/bin/:$PATH
+[ -d $HOME/gems ] && export GEM_HOME="$HOME/gems"
 export GPG_TTY=$(tty)
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export HOMEBREW_NO_ANALYTICS=1
