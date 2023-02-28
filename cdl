@@ -29,13 +29,12 @@ NAV_DIRS = {
         'u-competitions' : [2, 'UoA/COMPETITIONS'],
         'u-courses'      : [1, 'UoA/COURSES'],
         'u-extcurr'      : [3, 'UoA/EXTCURR'],
-        'u-w281'         : [0, 'UoA/WORK/SOFTENG281 2022'],
-        'u-w206'         : [0, 'UoA/WORK/SOFTENG206 2022'],
+        'u-w281'         : [0, 'UoA/WORK/SOFTENG281 2023'],
         'u-wra'          : [0, 'UoA/WORK/RA 2022'],
-        'u-335'          : [2, 'UoA/COURSES/2022-S2/COMPSCI335'],
-        'u-306'          : [2, 'UoA/COURSES/2022-S2/SOFTENG306'],
-        'u-325'          : [2, 'UoA/COURSES/2022-S2/SOFTENG325'],
-        'u-364'          : [2, 'UoA/COURSES/2022-S2/SOFTENG364'],
+        'u-700'          : [2, 'UoA/COURSES/2023-S1/SOFTENG700A'],
+        'u-701'          : [2, 'UoA/COURSES/2023-S1/SOFTENG701'],
+        'u-750'          : [2, 'UoA/COURSES/2023-S1/SOFTENG750'],
+        'u-770'          : [2, 'UoA/COURSES/2023-S1/SOFTENG770'],
 }
 
 
