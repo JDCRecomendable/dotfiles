@@ -18,9 +18,9 @@ DEPENDENCIES
 DIRS = [
     [-1, 'ACADEMIC'],
     [0, 'SOFTENG 700A', '700', '1'],
-    [0, 'SOFTENG 701', '701', '2'],
+    [1, 'SOFTENG 701', '701', '2', '@'],
     [0, 'SOFTENG 750', '750', '3'],
-    [0, 'SOFTENG 770', '770', '4'],
+    [1, 'SOFTENG 770', '770', '4', '$'],
     [-1, '\nWORK'],
     [0, 'RA 2022', 'wra', '5'],
     [0, 'SE 281 2023', 'w281', '7'],
@@ -28,6 +28,7 @@ DIRS = [
     [0, 'ADMIN', 'admin', '0'],
     [0, 'UoA COMPETITIONS', 'competitions', '='],
     [0, 'UoA EXTCURR', 'extcurr', '-'],
+    [0, 'BOOKS', 'books', '8'],
     [0, 'CLUBS', 'clubs', '9'],
 ]
 

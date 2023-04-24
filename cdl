@@ -31,6 +31,8 @@ NAV_DIRS = {
         'u-extcurr'      : [3, 'UoA/EXTCURR'],
         'u-w281'         : [0, 'UoA/WORK/SOFTENG281 2023'],
         'u-wra'          : [0, 'UoA/WORK/RA 2022'],
+        'u-701b'         : [0, 'UoA/BOOKS/2023-S1/SOFTENG701'],
+        'u-770b'         : [0, 'UoA/BOOKS/2023-S1/SOFTENG770'],
         'u-700'          : [2, 'UoA/COURSES/2023-S1/SOFTENG700A'],
         'u-701'          : [2, 'UoA/COURSES/2023-S1/SOFTENG701'],
         'u-750'          : [2, 'UoA/COURSES/2023-S1/SOFTENG750'],
