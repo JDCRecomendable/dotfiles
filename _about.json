@@ -89,6 +89,13 @@
         ],
         "target_location": "~/.local/share/applications/drawio.desktop"
     },
+    "desktop-dropbox-quit.desktop": {
+        "is_in_use": true,
+        "platforms": [
+            "Fedora"
+        ],
+        "target_location": "~/.local/share/applications/dropbox-quit.desktop"
+    },
     "desktop-dropbox.desktop": {
         "is_in_use": true,
         "platforms": [

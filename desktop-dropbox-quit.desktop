@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Dropbox Quit
+StartupWMClass=dropbox
+Comment=Cloud storage for Linux, Mac and Windows.
+GenericName=Cloud Storage
+Exec=/home/username/Apps/Dropbox/run-quit
+Icon=/home/username/Apps/Dropbox/dropbox.png
+Type=Application
+Categories=Network;FileTools;
+Path=/home/username
