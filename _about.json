@@ -110,6 +110,13 @@
         ],
         "target_location": "~/.local/share/applications/lanxchange.desktop"
     },
+    "desktop-logid-restart.desktop": {
+        "is_in_use": true,
+        "platforms": [
+            "Fedora"
+        ],
+        "target_location": "~/.local/share/applications/logid-restart.desktop"
+    },
     "desktop-postman.desktop": {
         "is_in_use": true,
         "platforms": [

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=LogiOps Restart
+StartupWMClass=logid
+Comment=Restart the LogiOps daemon if problems arise.
+GenericName=Restart Mouse Daemon
+Exec=/home/username/Apps/LogiOpsFix/run
+Icon=/home/username/Apps/LogiOpsFix/icon.png
+Type=Application
+Categories=System;
+Path=/home/username
