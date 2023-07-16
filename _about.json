@@ -120,7 +120,8 @@
     "desktop-postman.desktop": {
         "is_in_use": true,
         "platforms": [
-            "Fedora"
+            "Fedora",
+            "Ubuntu"
         ],
         "target_location": "~/.local/share/applications/postman.desktop"
     },
