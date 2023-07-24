@@ -17,25 +17,26 @@ DEPENDENCIES
 # [row_type, label, cdl_command, keycode_binding, keycode_binding_book]
 DIRS = [
     [-1, 'ACADEMIC'],
-    [0, 'SOFTENG 700A', '700', '1'],
-    [1, 'SOFTENG 701', '701', '2', '@'],
-    [0, 'SOFTENG 750', '750', '3'],
-    [1, 'SOFTENG 770', '770', '4', '$'],
+    [0, 'SOFTENG 700A', '700a', '1'],
+    [0, 'SOFTENG 700B', '700b', '2'],
+    [0, 'SOFTENG 702', '702', '3'],
+    [0, 'SOFTENG 752', '752', '4'],
+    [0, 'ENGGEN 403', '403', '5'],
     [-1, '\nWORK'],
-    [0, 'RA 2022', 'wra', '5'],
-    [0, 'SE 281 2023', 'w281', '7'],
+    [0, 'RA 2022', 'wra', '6'],
+    [0, 'SE 206 2023', 'w206', '7'],
+    [0, 'SE 283 2023', 'w283', '8'],
+    [0, 'SE 364 2023', 'w364', '9'],
     [-1, '\nMISC'],
     [0, 'ADMIN', 'admin', '0'],
-    [0, 'UoA COMPETITIONS', 'competitions', '='],
-    [0, 'UoA EXTCURR', 'extcurr', '-'],
-    [0, 'BOOKS', 'books', '8'],
-    [0, 'CLUBS', 'clubs', '9'],
+    [0, 'UoA COMPETITIONS', 'competitions', '-'],
+    [0, 'CLUBS', 'clubs', '='],
 ]
 
 COMMAND = '~/.local/bin/cdl u-{}'
 COMMAND_BOOK_DIR = '~/.local/bin/cdl u-{}b'
 
-WIN_SIZE = (640, 864)
+WIN_SIZE = (640, 920)
 WIN_ORIGIN = (640, 108)
 
 class MainFrame(wx.Frame):
