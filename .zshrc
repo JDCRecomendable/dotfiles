@@ -83,8 +83,13 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export EDITOR=/usr/bin/vim
-export VISUAL=/usr/bin/vim
+if [ -f /opt/homebrew/bin/vim ]; then
+    export EDITOR=/opt/homebrew/bin/vim
+    export VISUAL=/opt/homebrew/bin/vim
+else
+    export EDITOR=/usr/bin/vim
+    export VISUAL=/usr/bin/vim
+fi
 [ -d $HOME/gems/bin ] && export PATH=$HOME/gems/bin/:$PATH
 [ -d $HOME/.local/bin ] && export PATH=$HOME/.local/bin/:$PATH
 [ -d /snap/bin ] && export PATH=/snap/bin/:$PATH
