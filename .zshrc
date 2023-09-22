@@ -135,6 +135,9 @@ command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+if [ -n "$(uname -a | grep Darwin)" ]; then
+    alias ghopen='open -a Firefox.app $(git remote get-url origin)'
+fi
 command -v cdl &> /dev/null && alias cdlp='f() { cd "$(cdl -p $1)" };f'
 
 # Add integration with iTerm2
