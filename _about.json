@@ -35,10 +35,17 @@
         ],
         "target_location": "~/.xinitrc"
     },
-    ".zprofile": {
+    ".zprofile-macos": {
         "is_in_use": true,
         "platforms": [
             "macOS"
+        ],
+        "target_location": "~/.zprofile"
+    },
+    ".zprofile-ubuntu": {
+        "is_in_use": true,
+        "platforms": [
+            "Ubuntu"
         ],
         "target_location": "~/.zprofile"
     },

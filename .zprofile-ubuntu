@@ -1,0 +1,2 @@
+# Added by Toolbox App
+export PATH="$PATH:/home/username/.local/share/JetBrains/Toolbox/scripts"
