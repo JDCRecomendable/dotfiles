@@ -24,7 +24,8 @@
         "is_in_use": true,
         "platforms": [
             "Ubuntu",
-            "Fedora"
+            "Fedora",
+            "macOS"
         ],
         "target_location": "~/.vimrc"
     },
