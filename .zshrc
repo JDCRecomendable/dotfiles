@@ -90,12 +90,9 @@ else
     export EDITOR=/usr/bin/vim
     export VISUAL=/usr/bin/vim
 fi
-[ -d $HOME/gems/bin ] && export PATH=$HOME/gems/bin/:$PATH
-[ -d $HOME/.local/bin ] && export PATH=$HOME/.local/bin/:$PATH
-[ -d $HOME/.docker/bin ] && export PATH=$HOME/.docker/bin/:$PATH
-[ -d /snap/bin ] && export PATH=/snap/bin/:$PATH
-[ -d /opt/homebrew/opt/node@18/bin ] && export PATH=/opt/homebrew/opt/node@18/bin/:$PATH
-[ -d $HOME/gems ] && export GEM_HOME="$HOME/gems"
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
 export GPG_TTY=$(tty)
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export HOMEBREW_NO_ANALYTICS=1
@@ -104,6 +101,13 @@ export TYPEWRITTEN_COLOR_MAPPINGS="primary:red;secondary:red;accent:black;foregr
 export TYPEWRITTEN_CURSOR="block"
 command -v thefuck &> /dev/null && eval "$(thefuck --alias)"
 command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
+
+[ -d $HOME/gems/bin ] && export PATH=$HOME/gems/bin/:$PATH
+[ -d $HOME/.local/bin ] && export PATH=$HOME/.local/bin/:$PATH
+[ -d $HOME/.docker/bin ] && export PATH=$HOME/.docker/bin/:$PATH
+[ -d /snap/bin ] && export PATH=/snap/bin/:$PATH
+[ -d /opt/homebrew/opt/node@18/bin ] && export PATH=/opt/homebrew/opt/node@18/bin/:$PATH
+[ -d $HOME/gems ] && export GEM_HOME="$HOME/gems"
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -112,8 +116,6 @@ command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 [ -d $HOME/.nvm ] && export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
