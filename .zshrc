@@ -75,7 +75,7 @@ if [ -n "$(uname -a | grep Ubuntu)" ]; then
 elif [ -n "$(uname -a | grep Darwin)" ]; then
     plugins=(git zsh-interactive-cd python fzf tig vscode docker macos brew textmate zsh-autosuggestions)
 elif [ -f /etc/fedora-release ]; then
-    plugins=(git zsh-interactive-cd python fzf tig vscode docker systemd ufw zsh-autosuggestions)
+    plugins=(git zsh-interactive-cd python fzf tig vscode docker dnf systemd ufw zsh-autosuggestions)
 else
     plugins=(git zsh-interactive-cd python fzf tig vscode docker zsh-autosuggestions)
 fi
