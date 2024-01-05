@@ -14,6 +14,10 @@ set autoindent
 set tabstop=4 shiftwidth=4 expandtab
 set foldmethod=marker
 
+" bash-completion-like behavior
+set wildmenu
+set wildmode=list:longest
+
 call plug#begin()
 Plug 'maralla/completor.vim'
 Plug 'vimsence/vimsence'
