@@ -38,16 +38,14 @@ set statusline+=%#LightGrayHi#%{(mode()=='v')?'\ \ VISUAL\ ':''}
 set statusline+=%#LightGrayHi#%{(mode()=='V')?'\ \ VISUAL\ LINE\ ':''}
 set statusline+=%#BackgroundHi#%{''}
 set statusline+=\ %f                   " relative file path
-set statusline+=\ %#YellowHi#%(%m%)    " modified flag, i.e. are file changes unsaved?
-set statusline+=%#BackgroundHi#%{''}
 set statusline+=\ %Y                   " file type
-set statusline+=\ %#RedHi#%(%r%)       " read-only flag, i.e. is file read-only?
-set statusline+=%#BackgroundHi#%{''}
 set statusline+=%=                     " divider to separate left side from right
+set statusline+=%#YellowHi#%(%m%)      " modified flag, i.e. are file changes unsaved?
 set statusline+=%#BackgroundRightHi#%{''}
 set statusline+=\ CHAR\ %4b\ (0x%04B)  " character set (ASCII/Unicode)
 set statusline+=\ \ %5l:%-3c           " line and column number
-set statusline+=\ \ %L\ lines\         " total number of lines
+set statusline+=\ \ %L\ lines          " total number of lines
+set statusline+=\ %#RedHi#%(%r%)       " read-only flag, i.e. is file read-only?
 
 call plug#begin()
 Plug 'maralla/completor.vim'
