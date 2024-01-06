@@ -42,9 +42,9 @@ set statusline+=\ %Y                   " file type
 set statusline+=%=                     " divider to separate left side from right
 set statusline+=%#YellowHi#%(%m%)      " modified flag, i.e. are file changes unsaved?
 set statusline+=%#BackgroundRightHi#%{''}
-set statusline+=\ CHAR\ %4b\ (0x%04B)  " character set (ASCII/Unicode)
-set statusline+=\ \ %5l:%-3c           " line and column number
-set statusline+=\ \ %L\ lines          " total number of lines
+set statusline+=\ CHAR\ %4b            " character set (ASCII/Unicode)
+set statusline+=\ \ %4l:%-3c           " line and column number
+set statusline+=\ \ %Ll                " total number of lines
 set statusline+=\ %#RedHi#%(%r%)       " read-only flag, i.e. is file read-only?
 
 call plug#begin()
