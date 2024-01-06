@@ -20,14 +20,16 @@ set wildmode=list:longest
 
 " add colors to Vim
 hi NormalColor guifg=Black guibg=Cyan ctermbg=Cyan ctermfg=0
+hi CommandColor guifg=Black guibg=Yellow ctermbg=Yellow ctermfg=0
 hi InsertColor guifg=Black guibg=Green ctermbg=Green ctermfg=0
-hi ReplaceColor guifg=Black guibg=DarkMagenta ctermbg=DarkMagenta ctermfg=0
-hi VisualColor guifg=Black guibg=Red ctermbg=Red ctermfg=0
+hi ReplaceColor guifg=Black guibg=Red ctermbg=Red ctermfg=0
+hi VisualColor guifg=Black guibg=LightGray ctermbg=LightGray ctermfg=0
 hi VisualLineColor guifg=Black guibg=Blue ctermbg=32 ctermfg=255
 
 " make status line more useful
 set statusline=
 set statusline+=%#NormalColor#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set statusline+=%#CommandColor#%{(mode()=='c')?'\ \ COMMAND\ ':''}
 set statusline+=%#InsertColor#%{(mode()=='i')?'\ \ INSERT\ ':''}
 set statusline+=%#ReplaceColor#%{(mode()=='R')?'\ \ REPLACE\ ':''}
 set statusline+=%#VisualColor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
