@@ -37,15 +37,19 @@ set statusline+=%#RedHi#%{(mode()=='R')?'\ \ REPLACE\ ':''}
 set statusline+=%#LightGrayHi#%{(mode()=='v')?'\ \ VISUAL\ ':''}
 set statusline+=%#LightGrayHi#%{(mode()=='V')?'\ \ VISUAL\ LINE\ ':''}
 set statusline+=%#BackgroundHi#%{''}
-set statusline+=\ %f                   " relative file path
-set statusline+=\ %Y                   " file type
-set statusline+=%=                     " divider to separate left side from right
-set statusline+=%#YellowHi#%(%m%)      " modified flag, i.e. are file changes unsaved?
+set statusline+=\ %f                                      " relative file path
+set statusline+=\ %Y                                      " file type
+set statusline+=\ %#RedHi#%(%{&endofline?'':'[noeol]'}%)  " noeol flag, i.e. does file not have empty blank line?
+set statusline+=%{&ff=='dos'?'[dos]':''}                  " dos flag, i.e. does file use CRLF for line endings?
+set statusline+=%{&ff=='mac'?'[mac]':''}                  " mac flag, i.e. does file use CR for line endings?
+set statusline+=%#BackgroundHi#%{''}
+set statusline+=%=                                        " divider to separate left side from right
+set statusline+=%#YellowHi#%(%m%)                         " modified flag, i.e. are file changes unsaved?
 set statusline+=%#BackgroundRightHi#%{''}
-set statusline+=\ CHAR\ %4b            " character set (ASCII/Unicode)
-set statusline+=\ \ %4l:%-3c           " line and column number
-set statusline+=\ \ %Ll                " total number of lines
-set statusline+=\ %#RedHi#%(%r%)       " read-only flag, i.e. is file read-only?
+set statusline+=\ CHAR\ %4b                               " character set (ASCII/Unicode)
+set statusline+=\ \ %4l:%-3c                              " line and column number
+set statusline+=\ \ %Ll                                   " total number of lines
+set statusline+=\ %#RedHi#%(%r%)                          " read-only flag, i.e. is file read-only?
 
 call plug#begin()
 Plug 'maralla/completor.vim'
