@@ -58,4 +58,5 @@ Plug 'vimsence/vimsence'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 call plug#end()
