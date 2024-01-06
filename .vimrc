@@ -20,29 +20,31 @@ set wildmenu
 set wildmode=list:longest
 
 " add colors to Vim
-hi NormalColor guifg=Black guibg=Cyan ctermbg=Cyan ctermfg=Black
-hi CommandColor guifg=Black guibg=Yellow ctermbg=Yellow ctermfg=Black
-hi InsertColor guifg=Black guibg=Green ctermbg=Green ctermfg=Black
-hi ReplaceColor guifg=Black guibg=Red ctermbg=Red ctermfg=White
-hi VisualColor guifg=Black guibg=LightGray ctermbg=LightGray ctermfg=Black
-hi BackgroundColor guifg=Black guibg=DarkBlue ctermbg=DarkBlue ctermfg=White
-hi BackgroundRightColor guifg=Black guibg=Blue ctermbg=Blue ctermfg=White
+hi CyanHi guifg=Black guibg=Cyan ctermbg=Cyan ctermfg=Black
+hi YellowHi guifg=Black guibg=Yellow ctermbg=Yellow ctermfg=Black
+hi GreenHi guifg=Black guibg=Green ctermbg=Green ctermfg=Black
+hi RedHi guifg=Black guibg=Red ctermbg=124 ctermfg=White
+hi LightGrayHi guifg=Black guibg=LightGray ctermbg=LightGray ctermfg=Black
+hi BackgroundHi guifg=Black guibg=DarkBlue ctermbg=DarkBlue ctermfg=White
+hi BackgroundRightHi guifg=Black guibg=Blue ctermbg=Blue ctermfg=White
 
 " make status line more useful
 set statusline=
-set statusline+=%#NormalColor#%{(mode()=='n')?'\ \ NORMAL\ ':''}
-set statusline+=%#CommandColor#%{(mode()=='c')?'\ \ COMMAND\ ':''}
-set statusline+=%#InsertColor#%{(mode()=='i')?'\ \ INSERT\ ':''}
-set statusline+=%#ReplaceColor#%{(mode()=='R')?'\ \ REPLACE\ ':''}
-set statusline+=%#VisualColor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
-set statusline+=%#VisualColor#%{(mode()=='V')?'\ \ VISUAL\ LINE\ ':''}
-set statusline+=%#BackgroundColor#%{''}
-set statusline+=\ %F                   " full file path
-set statusline+=\ %M                   " modified flag, i.e. are file changes unsaved?
+set statusline+=%#CyanHi#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set statusline+=%#YellowHi#%{(mode()=='c')?'\ \ COMMAND\ ':''}
+set statusline+=%#GreenHi#%{(mode()=='i')?'\ \ INSERT\ ':''}
+set statusline+=%#RedHi#%{(mode()=='R')?'\ \ REPLACE\ ':''}
+set statusline+=%#LightGrayHi#%{(mode()=='v')?'\ \ VISUAL\ ':''}
+set statusline+=%#LightGrayHi#%{(mode()=='V')?'\ \ VISUAL\ LINE\ ':''}
+set statusline+=%#BackgroundHi#%{''}
+set statusline+=\ %f                   " relative file path
+set statusline+=\ %#YellowHi#%(%m%)    " modified flag, i.e. are file changes unsaved?
+set statusline+=%#BackgroundHi#%{''}
 set statusline+=\ %Y                   " file type
-set statusline+=\ %R                   " read-only flag, i.e. is file read-only?
+set statusline+=\ %#RedHi#%(%r%)       " read-only flag, i.e. is file read-only?
+set statusline+=%#BackgroundHi#%{''}
 set statusline+=%=                     " divider to separate left side from right
-set statusline+=%#BackgroundRightColor#%{''}
+set statusline+=%#BackgroundRightHi#%{''}
 set statusline+=\ CHAR\ %4b\ (0x%04B)  " character set (ASCII/Unicode)
 set statusline+=\ \ %5l:%-3c           " line and column number
 set statusline+=\ \ %L\ lines\         " total number of lines
