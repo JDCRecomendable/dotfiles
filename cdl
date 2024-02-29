@@ -2,7 +2,7 @@
 
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2020-2022 Jared Daniel Carbonell Recomendable.
+# Copyright (c) 2020-2024 Jared Daniel Carbonell Recomendable.
 
 
 from getpass import getuser
@@ -24,20 +24,18 @@ DROPBOX_DIR = '/{}/{}/Dropbox/'.format(HOME_DIR, USERNAME)
 #     'CMD_PARAM': [AUTO_NAV_DEPTH, 'RELATIVE FILE_LOCATION']
 NAV_DIRS = {
         'u-admin'        : [3, 'UoA/ADMIN'],
-        'u-books'        : [1, 'UoA/BOOKS'],
-        'u-clubs'        : [0, 'UoA/CLUBS'],
-        'u-competitions' : [2, 'UoA/COMPETITIONS'],
+#        'u-clubs'        : [0, 'UoA/CLUBS'],
+#        'u-competitions' : [2, 'UoA/COMPETITIONS'],
         'u-courses'      : [1, 'UoA/COURSES'],
-        'u-extcurr'      : [3, 'UoA/EXTCURR'],
-        'u-w206'         : [0, 'UoA/WORK/SOFTENG206 2023'],
-        'u-w283'         : [0, 'UoA/WORK/SOFTENG283 2023'],
-        'u-w364'         : [0, 'UoA/WORK/SOFTENG364 2023'],
-        'u-wra'          : [0, 'UoA/WORK/RA 2022'],
-        'u-700a'         : [2, 'UoA/COURSES/2023-S1/SOFTENG700A'],
-        'u-700b'         : [2, 'UoA/COURSES/2023-S2/SOFTENG700B'],
-        'u-702'          : [2, 'UoA/COURSES/2023-S2/SOFTENG702'],
-        'u-752'          : [2, 'UoA/COURSES/2023-S2/SOFTENG752'],
-        'u-403'          : [2, 'UoA/COURSES/2023-S2/ENGGEN403'],
+#        'u-extcurr'      : [3, 'UoA/EXTCURR'],
+        'u-w201'         : [0, 'UoA/WORK/COMPSYS201-2024'],
+        'u-w281'         : [0, 'UoA/WORK/SOFTENG281-2024'],
+        'u-w350'         : [0, 'UoA/WORK/SOFTENG350-2024'],
+        'u-w701'         : [0, 'UoA/WORK/SOFTENG701-2024'],
+        'u-w770'         : [0, 'UoA/WORK/SOFTENG770-2024'],
+        'u-wra270'       : [0, 'UoA/WORK/RA-MECHENG270-2022'],
+        'u-wrapoly'      : [0, 'UoA/WORK/RA-POLYGLOT-PROJECT'],
+        'u-wraps'        : [0, 'UoA/WORK/RA-PROGRAM-SYNTHESIS'],
 }
 
 

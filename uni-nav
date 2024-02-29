@@ -2,7 +2,7 @@
 
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2020 Jared Daniel Carbonell Recomendable.
+# Copyright (c) 2020-2024 Jared Daniel Carbonell Recomendable.
 
 import wx
 from subprocess import Popen
@@ -16,21 +16,18 @@ DEPENDENCIES
 # [row_type, label, cdl_command, keycode_binding] OR
 # [row_type, label, cdl_command, keycode_binding, keycode_binding_book]
 DIRS = [
-    [-1, 'ACADEMIC'],
-    [0, 'SOFTENG 700A', '700a', '1'],
-    [0, 'SOFTENG 700B', '700b', '2'],
-    [0, 'SOFTENG 702', '702', '3'],
-    [0, 'SOFTENG 752', '752', '4'],
-    [0, 'ENGGEN 403', '403', '5'],
-    [-1, '\nWORK'],
-    [0, 'RA 2022', 'wra', '6'],
-    [0, 'SE 206 2023', 'w206', '7'],
-    [0, 'SE 283 2023', 'w283', '8'],
-    [0, 'SE 364 2023', 'w364', '9'],
+    [-1, 'TEACHING ASSISTANT'],
+    [0, 'COMPSYS 201', 'w201', '1'],
+    [0, 'SOFTENG 281', 'w281', '2'],
+    [0, 'SOFTENG 350', 'w350', '3'],
+    [0, 'SOFTENG 701', 'w701', '4'],
+    [0, 'SOFTENG 770', 'w770', '5'],
+    [-1, '\nRESEARCH ASSISTANT'],
+    [0, 'MECHENG 270', 'wra270', '6'],
+    [0, 'POLYGLOT PROJECT', 'wrapoly', '7'],
+    [0, 'PROGRAM SYNTHESIS', 'wraps', '8'],
     [-1, '\nMISC'],
     [0, 'ADMIN', 'admin', '0'],
-    [0, 'UoA COMPETITIONS', 'competitions', '-'],
-    [0, 'CLUBS', 'clubs', '='],
 ]
 
 COMMAND = '~/.local/bin/cdl u-{}'
