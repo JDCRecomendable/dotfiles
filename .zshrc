@@ -140,6 +140,8 @@ command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 if [ -n "$(uname -a | grep Darwin)" ]; then
     alias ghopen='open -a Firefox.app $(git remote get-url origin)'
+else
+    alias ghopen='firefox --new-tab $(git remote get-url origin) &'
 fi
 command -v cdl &> /dev/null && alias cdlp='f() { cd "$(cdl -p $1)" };f'
 command -v batcat &> /dev/null && alias bat="batcat"
