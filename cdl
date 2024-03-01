@@ -12,11 +12,17 @@ import subprocess
 
 
 # Computer-specific constants
+USERNAME = getuser()
+
+# Ubuntu / Fedora using GNOME
 FILE_MANAGER_CMD = 'nautilus'
 HOME_DIR = 'home'
-USERNAME = getuser()
 DROPBOX_DIR = '/{}/{}/Dropbox/'.format(HOME_DIR, USERNAME)
-# DROPBOX_DIR = '/{}/{}/Library/CloudStorage/Dropbox/'.format(HOME_DIR, USERNAME)
+
+# macOS
+#FILE_MANAGER_CMD = 'open'
+#HOME_DIR = 'Users'
+#DROPBOX_DIR = '/{}/{}/Library/CloudStorage/Dropbox/'.format(HOME_DIR, USERNAME)
 
 
 # File locations
