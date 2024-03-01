@@ -17,21 +17,22 @@ DEPENDENCIES
 # [row_type, label, cdl_command, keycode_binding, keycode_binding_book]
 DIRS = [
     [-1, 'TEACHING ASSISTANT'],
-    [0, 'COMPSYS 201', 'w201', '1'],
-    [0, 'SOFTENG 281', 'w281', '2'],
-    [0, 'SOFTENG 350', 'w350', '3'],
-    [0, 'SOFTENG 701', 'w701', '4'],
-    [0, 'SOFTENG 770', 'w770', '5'],
+    [0, 'COMPSYS 201', 'u-w201', '1'],
+    [0, 'SOFTENG 281', 'u-w281', '2'],
+    [0, 'SOFTENG 350', 'u-w350', '3'],
+    [0, 'SOFTENG 701', 'u-w701', '4'],
+    [0, 'SOFTENG 770', 'u-w770', '5'],
     [-1, '\nRESEARCH ASSISTANT'],
-    [0, 'MECHENG 270', 'wra270', '6'],
-    [0, 'POLYGLOT PROJECT', 'wrapoly', '7'],
-    [0, 'PROGRAM SYNTHESIS', 'wraps', '8'],
+    [0, 'MECHENG 270', 'u-wra270', '6'],
+    [0, 'POLYGLOT PROJECT', 'u-wrapoly', '7'],
+    [0, 'PROGRAM SYNTHESIS', 'u-wraps', '8'],
     [-1, '\nMISC'],
-    [0, 'ADMIN', 'admin', '0'],
+    [0, 'ADMIN', 'u-admin', '0'],
+    [0, 'BESTCODER', 'bc', '-'],
 ]
 
-COMMAND = '~/.local/bin/cdl u-{}'
-COMMAND_BOOK_DIR = '~/.local/bin/cdl u-{}b'
+COMMAND = '~/.local/bin/cdl {}'
+COMMAND_BOOK_DIR = '~/.local/bin/cdl {}b'
 
 # 1920x1080
 WIN_SIZE = (640, 920)

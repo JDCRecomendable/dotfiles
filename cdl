@@ -42,6 +42,7 @@ NAV_DIRS = {
         'u-wra270'       : [0, 'UoA/WORK/RA-MECHENG270-2022'],
         'u-wrapoly'      : [0, 'UoA/WORK/RA-POLYGLOT-PROJECT'],
         'u-wraps'        : [0, 'UoA/WORK/RA-PROGRAM-SYNTHESIS'],
+        'bc'             : [2, 'Bestcoder'],
 }
 
 
