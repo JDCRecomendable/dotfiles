@@ -143,6 +143,9 @@ if [ -n "$(uname -a | grep Darwin)" ]; then
 else
     alias ghopen='firefox --new-tab $(git remote get-url origin) &'
 fi
+if [ -f /etc/fedora-release ]; then
+    alias open='xdg-open'
+fi
 command -v cdl &> /dev/null && alias cdlp='f() { cd "$(cdl -p $1)" };f'
 command -v batcat &> /dev/null && alias bat="batcat"
 
