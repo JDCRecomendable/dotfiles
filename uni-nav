@@ -54,19 +54,19 @@ class MainFrame(wx.Frame):
         container_main = wx.BoxSizer(wx.VERTICAL)
 
         # Set up GUI components and layout for the directories
-        for dir in DIRS:
+        for directory in DIRS:
             # List each directory option
             container = wx.BoxSizer(wx.HORIZONTAL)
-            label = wx.StaticText(panel, label=dir[1])
+            label = wx.StaticText(panel, label=directory[1])
 
             # Add label for each directory option
             container.Add(label, 1, wx.ALIGN_LEFT | wx.ALIGN_CENTRE_VERTICAL, 0)
 
             # Add buttons if row represents a directory option (row_type > -1)
-            if dir[0] > -1:
+            if directory[0] > -1:
                 # Add button for each directory option
-                button_dir = wx.Button(panel, label='OPEN [{}]'.format(dir[3]))
-                button_dir.Bind(wx.EVT_BUTTON, self.button_press(code=dir[3]))
+                button_dir = wx.Button(panel, label='OPEN [{}]'.format(directory[3]))
+                button_dir.Bind(wx.EVT_BUTTON, self.button_press(code=directory[3]))
                 button_dir.SetBackgroundColour((0, 128, 0))
                 button_dir.SetForegroundColour((255, 255, 255))
 
@@ -74,9 +74,9 @@ class MainFrame(wx.Frame):
                 button_dir.Bind(wx.EVT_CHAR, self.key_press)
 
                 # Add the button for the corresponding books directory, if present
-                if dir[0] == 1:
-                    button_books = wx.Button(panel, label='BOOK [⇧{}]'.format(dir[3]))
-                    button_books.Bind(wx.EVT_BUTTON, self.button_press(code=dir[4]))
+                if directory[0] == 1:
+                    button_books = wx.Button(panel, label='BOOK [⇧{}]'.format(directory[3]))
+                    button_books.Bind(wx.EVT_BUTTON, self.button_press(code=directory[4]))
                     button_books.Bind(wx.EVT_CHAR, self.key_press)
                     button_books.SetBackgroundColour((128, 64, 0))
                     button_books.SetForegroundColour((255, 255, 255))

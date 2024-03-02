@@ -2,7 +2,7 @@
 
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2018-2020 Jared Daniel Carbonell Recomendable.
+# Copyright (c) 2018-2024 Jared Daniel Carbonell Recomendable.
 
 from datetime import date
 from os import listdir, mkdir
@@ -17,8 +17,8 @@ def string_in_dir_names(dir_name: str):
     Used to determine if directory yyyymmdd_xx is taken, where yyyymmdd
     is the date and xx is the xx'th directory in that date.
     """
-    for dir in dirs:
-        if dir_name in dir:
+    for directory in dirs:
+        if dir_name in directory:
             dirs.pop(0)
             return True
     return False
@@ -56,7 +56,7 @@ def gen_dir_name(no_of_days: int = 0, dir_name_string: str = ""):
 
 def make_directory(no_of_days: int = 0, dir_name_string: str = ""):
     """Actually perform mkdir.
-    
+
     See gen_dir_name() for input parameter details.
     """
     try:
