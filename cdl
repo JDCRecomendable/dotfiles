@@ -34,6 +34,7 @@ NAV_DIRS = {
 #        'u-competitions' : [2, 'UoA/COMPETITIONS'],
         'u-courses'      : [1, 'UoA/COURSES'],
 #        'u-extcurr'      : [3, 'UoA/EXTCURR'],
+        'u-ta'           : [2, 'UoA/COURSES/2024-S1/ENGTA'],
         'u-w201'         : [0, 'UoA/WORK/COMPSYS201-2024'],
         'u-w281'         : [0, 'UoA/WORK/SOFTENG281-2024'],
         'u-w350'         : [0, 'UoA/WORK/SOFTENG350-2024'],
