@@ -1,0 +1,83 @@
+#!/usr/bin/env python3
+
+from os import listdir, path
+from typing import List
+import json
+import subprocess
+import sys
+
+from pathos.multiprocessing import ProcessPool as Pool
+
+
+EXCLUDED_DEV_CATEGORIES = ["Local", "Sandbox"]
+
+
+def main() -> None:
+    dev_dir_tree = {}
+    path_to_dev_dir = path.expanduser("~/Developer")
+    path_to_repos = []
+    repo_data = []
+    get_dir_tree(path_to_dev_dir, dev_dir_tree, 2, path_to_repos, repo_data, EXCLUDED_DEV_CATEGORIES)
+    repo_info = get_git_information_for_repos_with_remote(path_to_repos)
+    merge_tree_info_to_dev_dir_tree(repo_info, dev_dir_tree)
+    print(json.dumps(dev_dir_tree, sort_keys=True, indent=2))
+
+
+def get_dir_tree(path_to_dir: str, tree: dict, recurse: int, path_to_repos: List[str], repo_data: List[dict], excluded_names: List[str] = []):
+    if recurse < 0:
+        tree["is_git"] = True if ".git" in get_subdirs(path_to_dir) else False
+        if tree["is_git"]: path_to_repos.append(path_to_dir)
+        return
+    subdirs = get_subdirs(path_to_dir, excluded_names)
+    for subdir in subdirs:
+        tree[subdir] = {}
+        get_dir_tree(f"{path_to_dir}/{subdir}", tree[subdir], recurse - 1, path_to_repos, repo_data)
+
+
+def get_subdirs(path_to_dir: str, excluded_names: List[str] = []) -> List[str]:
+    subdirectories = []
+    for directory in listdir(path_to_dir):
+        if path.isdir(f"{path_to_dir}/{directory}") and directory not in excluded_names:
+            subdirectories.append(directory)
+    return subdirectories
+
+
+def get_git_information_for_repos_with_remote(path_to_repos: List[str]) -> List[dict]:
+    with Pool() as pool:
+        return pool.map(get_git_information_for_repo, path_to_repos)
+
+
+def get_git_information_for_repo(path_to_repo_dir: str) -> dict:
+    repo_datum = {}
+    path_breakup = path_to_repo_dir.split("/")
+
+    repo_datum["repo_category"], repo_datum["repo_subcategory"], repo_datum["repo_name"] = path_breakup[-3], path_breakup[-2], path_breakup[-1]
+    get_remote_return_val = subprocess.run(f"cd {path_to_repo_dir} && git remote get-url origin", shell=True, capture_output=True, text=True)
+    repo_datum["url"] = get_remote_return_val.stdout.strip()
+    fetch_return_value = subprocess.run(f"cd {path_to_repo_dir} && git fetch", shell=True, capture_output=True, text=True)
+    repo_datum["returncode"] = fetch_return_value.returncode
+    repo_datum["stdout"] = fetch_return_value.stdout
+    repo_datum["stderr"] = fetch_return_value.stderr
+    repo_datum["is_git"] = True
+
+    if repo_datum["returncode"] == 0:
+        git_status_return_value = subprocess.run(f"cd {path_to_repo_dir} && git status", shell=True, capture_output=True, text=True)
+        repo_datum["needs_manual_sync"] = "nothing to commit, working tree clean" not in git_status_return_value.stdout
+    return repo_datum
+
+
+def merge_tree_info_to_dev_dir_tree(repo_info: List[dict], dev_dir_tree: dict) -> None:
+    for repo in repo_info:
+        dev_dir_tree[repo["repo_category"]][repo["repo_subcategory"]][repo["repo_name"]] = repo
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("USAGE: devdirsync <pull|push|status> <data_file>")
+        exit(1)
+    action = sys.argv[1]
+    data_file = sys.argv[2]
+    if action not in ("pull", "push", "status"):
+        print("USAGE: devdirsync <pull|push|status> <data_file>")
+        exit(1)
+    main()
