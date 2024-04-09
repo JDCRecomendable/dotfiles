@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from os import listdir, path
+from os import listdir, makedirs, path
 from typing import List
 import json
 import subprocess
@@ -20,7 +20,12 @@ def main_pull_from() -> None:
         print("Place .syncdata.json into ~/Developer/ directory", file=sys.stderr)
         print("or run devdirsync push first.", file=sys.stderr)
         exit(1)
-    pass  # TODO CONTINUE
+    dev_dir_tree = {}
+    with open(PATH_TO_DATA_FILE, "r") as f:
+        dev_dir_tree |= json.load(f)
+    generate_dir_structure(dev_dir_tree)
+    get_repos_into_dev_dir(dev_dir_tree)
+    pass  # TODO CONTINUE: Print a summary of what needs to be manually synced
 
 
 def main_push_to() -> None:
@@ -38,6 +43,54 @@ def main_push_to() -> None:
     print("Writing scanned results to ~/Developer.syncdata.json done.")
 
 
+def generate_dir_structure(dev_dir_tree: dict) -> None:
+    for category in dev_dir_tree:
+        for subcategory in dev_dir_tree[category]:
+            makedirs(f"{PATH_TO_DEV_DIR}/{category}/{subcategory}", exist_ok=True)
+
+
+def get_repos_into_dev_dir(dev_dir_tree: dict) -> None:
+    repo_info = []
+    for category in dev_dir_tree:
+        for subcategory in dev_dir_tree[category]:
+            for repo in dev_dir_tree[category][subcategory]:
+                repo_info.append(dev_dir_tree[category][subcategory][repo])
+    with Pool() as pool:
+        pool.map(get_repo_into_dev_dir, repo_info)
+
+
+def get_repo_into_dev_dir(repo: dict) -> None:
+    path_to_repo_parent = f"{PATH_TO_DEV_DIR}/{repo["repo_category"]}/{repo["repo_subcategory"]}"
+
+    # Check if repo already exists
+    if path.isdir(f"{path_to_repo_parent}/{repo["repo_name"]}"):
+        return
+
+    # Check if repo is not a git repo
+    if not repo["is_git"]:
+        leave_repo_pull_note(repo, path_to_repo_parent)
+        return
+
+    # Otherwise, try to clone repo
+    clone_repo(repo, path_to_repo_parent)
+
+    # Cloned repos may need manual sync, i.e. unsaved changes from other computers
+    if repo["needs_manual_sync"]:
+        leave_repo_pull_note(repo, path_to_repo_parent)
+
+
+def leave_repo_pull_note(repo: dict, path_to_repo_parent: str) -> None:
+    path_to_repo = f"{path_to_repo_parent}/{repo["repo_name"]}"
+    makedirs(path_to_repo, exist_ok=True)
+    subprocess.run(f"cd {path_to_repo} && echo \"NEEDS MANUAL SYNC\" > AAA_SYNC_NOTE.txt", shell=True)
+
+
+def clone_repo(repo: dict, path_to_repo_parent: str):
+    clone_return_val = subprocess.run(f"cd {path_to_repo_parent} && git clone {repo["url"]}", shell=True, capture_output=True)
+    if clone_return_val.returncode != 0:
+        leave_repo_pull_note(repo, path_to_repo_parent)
+
+
 def main_status() -> None:
     if not path.isfile(PATH_TO_DATA_FILE):
         main_push_to()
@@ -48,6 +101,8 @@ def get_dir_tree(path_to_dir: str, tree: dict, recurse: int, path_to_repos: List
     if recurse < 0:
         tree["is_git"] = True if ".git" in get_subdirs(path_to_dir) else False
         if tree["is_git"]: path_to_repos.append(path_to_dir)
+        path_breakup = path_to_dir.split("/")
+        tree["repo_category"], tree["repo_subcategory"], tree["repo_name"] = path_breakup[-3], path_breakup[-2], path_breakup[-1]
         return
     subdirs = get_subdirs(path_to_dir, excluded_names)
     for subdir in subdirs:
@@ -84,6 +139,8 @@ def get_git_information_for_repo(path_to_repo_dir: str) -> dict:
     if repo_datum["returncode"] == 0:
         git_status_return_value = subprocess.run(f"cd {path_to_repo_dir} && git status", shell=True, capture_output=True, text=True)
         repo_datum["needs_manual_sync"] = "nothing to commit, working tree clean" not in git_status_return_value.stdout
+    else:
+        repo_datum["needs_manual_sync"] = True
     return repo_datum
 
 
