@@ -10,17 +10,31 @@ from pathos.multiprocessing import ProcessPool as Pool
 
 
 EXCLUDED_DEV_CATEGORIES = ["Local", "Sandbox"]
+PATH_TO_DEV_DIR = path.expanduser("~/Developer")
 
 
-def main() -> None:
+def main_pull_from(path_to_data_file: str) -> None:
+    if not path.isfile(path_to_data_file):
+        print("Path to data file invalid!", file=sys.stderr)
+        exit(1)
+    pass  # TODO CONTINUE
+
+
+def main_push_to(path_to_data_file: str) -> None:
     dev_dir_tree = {}
-    path_to_dev_dir = path.expanduser("~/Developer")
     path_to_repos = []
     repo_data = []
-    get_dir_tree(path_to_dev_dir, dev_dir_tree, 2, path_to_repos, repo_data, EXCLUDED_DEV_CATEGORIES)
+    get_dir_tree(PATH_TO_DEV_DIR, dev_dir_tree, 2, path_to_repos, repo_data, EXCLUDED_DEV_CATEGORIES)
     repo_info = get_git_information_for_repos_with_remote(path_to_repos)
     merge_tree_info_to_dev_dir_tree(repo_info, dev_dir_tree)
-    print(json.dumps(dev_dir_tree, sort_keys=True, indent=2))
+    with open(path_to_data_file, "w") as f:
+        json.dump(dev_dir_tree, f, sort_keys=True, indent=2)
+
+
+def main_status(path_to_data_file: str) -> None:
+    if not path.isfile(path_to_data_file):
+        main_push_to(path_to_data_file)
+    pass  # TODO CONTINUE
 
 
 def get_dir_tree(path_to_dir: str, tree: dict, recurse: int, path_to_repos: List[str], repo_data: List[dict], excluded_names: List[str] = []):
@@ -71,13 +85,23 @@ def merge_tree_info_to_dev_dir_tree(repo_info: List[dict], dev_dir_tree: dict) -
         dev_dir_tree[repo["repo_category"]][repo["repo_subcategory"]][repo["repo_name"]] = repo
 
 
+def print_help_and_exit() -> None:
+    print("USAGE: devdirsync <pull|push|status> <path_to_data_file>")
+    exit(1)
+
+
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("USAGE: devdirsync <pull|push|status> <data_file>")
-        exit(1)
+        print_help_and_exit()
+
     action = sys.argv[1]
-    data_file = sys.argv[2]
-    if action not in ("pull", "push", "status"):
-        print("USAGE: devdirsync <pull|push|status> <data_file>")
-        exit(1)
-    main()
+    path_to_data_file = sys.argv[2]
+
+    if action == "pull":
+        main_pull_from(path_to_data_file)
+    elif action == "push":
+        main_push_to(path_to_data_file)
+    elif action == "status":
+        main_status(path_to_data_file)
+    else:
+        print_help_and_exit()
