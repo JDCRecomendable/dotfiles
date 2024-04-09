@@ -11,29 +11,36 @@ from pathos.multiprocessing import ProcessPool as Pool
 
 EXCLUDED_DEV_CATEGORIES = ["Local", "Sandbox"]
 PATH_TO_DEV_DIR = path.expanduser("~/Developer")
+PATH_TO_DATA_FILE = path.expanduser("~/Developer/.syncdata.json")
 
 
-def main_pull_from(path_to_data_file: str) -> None:
-    if not path.isfile(path_to_data_file):
+def main_pull_from() -> None:
+    if not path.isfile(PATH_TO_DATA_FILE):
         print("Path to data file invalid!", file=sys.stderr)
+        print("Place .syncdata.json into ~/Developer/ directory", file=sys.stderr)
+        print("or run devdirsync push first.", file=sys.stderr)
         exit(1)
     pass  # TODO CONTINUE
 
 
-def main_push_to(path_to_data_file: str) -> None:
+def main_push_to() -> None:
     dev_dir_tree = {}
     path_to_repos = []
     repo_data = []
+    print("Scanning ~/Developer directory... (you may be prompted to authenticate to Git remote servers)")
     get_dir_tree(PATH_TO_DEV_DIR, dev_dir_tree, 2, path_to_repos, repo_data, EXCLUDED_DEV_CATEGORIES)
     repo_info = get_git_information_for_repos_with_remote(path_to_repos)
     merge_tree_info_to_dev_dir_tree(repo_info, dev_dir_tree)
-    with open(path_to_data_file, "w") as f:
+    print("Scanning ~/Developer directory done.")
+    print("Writing scanned results to ~/Developer.syncdata.json...")
+    with open(PATH_TO_DATA_FILE, "w") as f:
         json.dump(dev_dir_tree, f, sort_keys=True, indent=2)
+    print("Writing scanned results to ~/Developer.syncdata.json done.")
 
 
-def main_status(path_to_data_file: str) -> None:
-    if not path.isfile(path_to_data_file):
-        main_push_to(path_to_data_file)
+def main_status() -> None:
+    if not path.isfile(PATH_TO_DATA_FILE):
+        main_push_to()
     pass  # TODO CONTINUE
 
 
@@ -86,22 +93,21 @@ def merge_tree_info_to_dev_dir_tree(repo_info: List[dict], dev_dir_tree: dict) -
 
 
 def print_help_and_exit() -> None:
-    print("USAGE: devdirsync <pull|push|status> <path_to_data_file>")
+    print("USAGE: devdirsync <pull|push|status>")
     exit(1)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 2:
         print_help_and_exit()
 
     action = sys.argv[1]
-    path_to_data_file = sys.argv[2]
 
     if action == "pull":
-        main_pull_from(path_to_data_file)
+        main_pull_from()
     elif action == "push":
-        main_push_to(path_to_data_file)
+        main_push_to()
     elif action == "status":
-        main_status(path_to_data_file)
+        main_status()
     else:
         print_help_and_exit()
