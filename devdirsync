@@ -15,6 +15,7 @@ PATH_TO_DATA_FILE = path.expanduser("~/Developer/.syncdata.json")
 
 
 def main_pull_from() -> None:
+    print("Reading .sync.data.json...")
     if not path.isfile(PATH_TO_DATA_FILE):
         print("Path to data file invalid!", file=sys.stderr)
         print("Place .syncdata.json into ~/Developer/ directory", file=sys.stderr)
@@ -23,9 +24,16 @@ def main_pull_from() -> None:
     dev_dir_tree = {}
     with open(PATH_TO_DATA_FILE, "r") as f:
         dev_dir_tree |= json.load(f)
+    print("Reading .sync.data.json done.")
+
+    print("Generating directory structure for ~/Developer...")
     generate_dir_structure(dev_dir_tree)
+    print("Generating directory structure for ~/Developer done.")
+    print("Attempting to clone repos into ~/Developer...")
     get_repos_into_dev_dir(dev_dir_tree)
-    pass  # TODO CONTINUE: Print a summary of what needs to be manually synced
+    print("Attempting to clone repos into ~/Developer done.")
+    print()
+    print_repos_needing_manual_sync(dev_dir_tree)
 
 
 def main_push_to() -> None:
@@ -41,6 +49,7 @@ def main_push_to() -> None:
     with open(PATH_TO_DATA_FILE, "w") as f:
         json.dump(dev_dir_tree, f, sort_keys=True, indent=2)
     print("Writing scanned results to ~/Developer.syncdata.json done.")
+    print_repos_needing_manual_sync(dev_dir_tree)
 
 
 def generate_dir_structure(dev_dir_tree: dict) -> None:
@@ -57,6 +66,41 @@ def get_repos_into_dev_dir(dev_dir_tree: dict) -> None:
                 repo_info.append(dev_dir_tree[category][subcategory][repo])
     with Pool() as pool:
         pool.map(get_repo_into_dev_dir, repo_info)
+
+
+def print_repos_needing_manual_sync(dev_dir_tree: dict) -> None:
+    no_remote = {}
+    otherwise_needs_manual_sync = {}
+    for category in dev_dir_tree:
+        for subcategory in dev_dir_tree[category]:
+            for repo in dev_dir_tree[category][subcategory]:
+                repo_status = dev_dir_tree[category][subcategory][repo]
+                if not repo_status["is_git"]:
+                    add_to_manual_sync_dict(category, subcategory, repo, no_remote)
+                elif repo_status["needs_manual_sync"]:
+                    add_to_manual_sync_dict(category, subcategory, repo, otherwise_needs_manual_sync)
+    print("The following repos do not have a remote:")
+    print_manual_sync_dict_tree(no_remote)
+    print("The following repos have a remote but still need manual sync for other reasons:")
+    print_manual_sync_dict_tree(otherwise_needs_manual_sync)
+
+
+def add_to_manual_sync_dict(category: str, subcategory: str, repo: str, manual_sync_dict: dict) -> None:
+    if category not in manual_sync_dict:
+        manual_sync_dict[category] = {}
+    if subcategory not in manual_sync_dict[category]:
+        manual_sync_dict[category][subcategory] = []
+    manual_sync_dict[category][subcategory].append(repo)
+
+
+def print_manual_sync_dict_tree(manual_sync_dict: dict) -> None:
+    for category in manual_sync_dict:
+        print(f"\t{category}")
+        for subcategory in manual_sync_dict[category]:
+            print(f"\t\t{subcategory}")
+            for repo in manual_sync_dict[category][subcategory]:
+                print(f"\t\t\t{repo}")
+            print()
 
 
 def get_repo_into_dev_dir(repo: dict) -> None:
