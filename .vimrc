@@ -20,13 +20,13 @@ set wildmenu
 set wildmode=list:longest
 
 " add colors to Vim
-hi CyanHi guifg=Black guibg=Cyan ctermbg=Cyan ctermfg=Black
-hi YellowHi guifg=Black guibg=Yellow ctermbg=Yellow ctermfg=Black
-hi GreenHi guifg=Black guibg=Green ctermbg=Green ctermfg=Black
-hi RedHi guifg=Black guibg=Red ctermbg=124 ctermfg=White
-hi LightGrayHi guifg=Black guibg=LightGray ctermbg=LightGray ctermfg=Black
-hi BackgroundHi guifg=Black guibg=DarkBlue ctermbg=DarkBlue ctermfg=White
-hi BackgroundRightHi guifg=Black guibg=Blue ctermbg=Blue ctermfg=White
+hi CyanHi guifg=Black guibg=Cyan ctermbg=51 ctermfg=16
+hi YellowHi guifg=Black guibg=Yellow ctermbg=220 ctermfg=16
+hi GreenHi guifg=Black guibg=Green ctermbg=10 ctermfg=16
+hi RedHi guifg=Black guibg=Red ctermbg=124 ctermfg=255
+hi LightGrayHi guifg=Black guibg=LightGray ctermbg=248 ctermfg=16
+hi BackgroundHi guifg=Black guibg=DarkBlue ctermbg=19 ctermfg=254
+hi BackgroundRightHi guifg=Black guibg=Blue ctermbg=26 ctermfg=255
 
 " make status line more useful
 set statusline=
