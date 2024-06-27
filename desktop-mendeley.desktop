@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Mendeley Reference Manager
+StartupWMClass=mendeley
+Comment=Mendeley Reference Manager
+GenericName=Reference Manager
+Exec=/home/username/Apps/Mendeley/run
+Icon=/home/username/Apps/Mendeley/mendeley.png
+Type=Application
+Categories=Science;Education;Office;ComputerScience;
+Path=/home/username/Apps/Mendeley

@@ -126,6 +126,14 @@
         ],
         "target_location": "~/.local/share/applications/logid-restart.desktop"
     },
+    "desktop-mendeley.desktop": {
+        "is_in_use": true,
+        "platforms": [
+            "Ubuntu",
+            "Fedora"
+        ],
+        "target_location": "~/.local/share/applications/mendeley.desktop"
+    },
     "desktop-postman.desktop": {
         "is_in_use": true,
         "platforms": [
