@@ -149,5 +149,5 @@ fi
 command -v cdl &> /dev/null && alias cdlp='f() { cd "$(cdl -p $1)" };f'
 command -v batcat &> /dev/null && alias bat="batcat"
 
-# Add integration with iTerm2
+# Add integration with iTerm2, ensure this is the last line!
 [ -e $HOME/.iterm2_shell_integration.zsh ] && source $HOME/.iterm2_shell_integration.zsh || true
