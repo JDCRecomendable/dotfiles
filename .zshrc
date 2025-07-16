@@ -105,6 +105,7 @@ command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 [ -d $HOME/gems/bin ] && export PATH=$HOME/gems/bin/:$PATH
 [ -d $HOME/.local/bin ] && export PATH=$HOME/.local/bin/:$PATH
 [ -d $HOME/.docker/bin ] && export PATH=$HOME/.docker/bin/:$PATH
+[ -d $HOME/.lmstudio/bin ] && export PATH=$PATH:$HOME/.lmstudio/bin/
 [ -d /snap/bin ] && export PATH=/snap/bin/:$PATH
 [ -d /opt/homebrew/opt/node@18/bin ] && export PATH=/opt/homebrew/opt/node@18/bin/:$PATH
 [ -d $HOME/gems ] && export GEM_HOME="$HOME/gems"
