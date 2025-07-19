@@ -108,6 +108,7 @@ command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 [ -d $HOME/.lmstudio/bin ] && export PATH=$PATH:$HOME/.lmstudio/bin/
 [ -d /snap/bin ] && export PATH=/snap/bin/:$PATH
 [ -d /opt/homebrew/opt/node@18/bin ] && export PATH=/opt/homebrew/opt/node@18/bin/:$PATH
+[ -d /opt/homebrew/opt/curl/bin ] && export PATH=/opt/homebrew/opt/curl/bin/:$PATH
 [ -d $HOME/gems ] && export GEM_HOME="$HOME/gems"
 [ -f /opt/homebrew/bin/lesspipe.sh ] && export LESSOPEN="|/opt/homebrew/bin/lesspipe.sh %s"
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
