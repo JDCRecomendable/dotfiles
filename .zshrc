@@ -93,6 +93,8 @@ fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+[ -d $HOME/Library/Android/sdk ] && export ANDROID_HOME=$HOME/Library/Android/sdk
+
 export GPG_TTY=$(tty)
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export HOMEBREW_NO_ANALYTICS=1
@@ -105,6 +107,8 @@ command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 [ -d $HOME/gems/bin ] && export PATH=$HOME/gems/bin/:$PATH
 [ -d $HOME/.local/bin ] && export PATH=$HOME/.local/bin/:$PATH
 [ -d $HOME/.docker/bin ] && export PATH=$HOME/.docker/bin/:$PATH
+[ -d $HOME/Library/Android/sdk/platform-tools ] && export PATH=$HOME/Library/Android/sdk/platform-tools/:$PATH
+[ -d $HOME/Library/Android/sdk/cmdline-tools/latest/bin ] && export PATH=$HOME/Library/Android/sdk/cmdline-tools/latest/bin/:$PATH
 [ -d $HOME/.lmstudio/bin ] && export PATH=$PATH:$HOME/.lmstudio/bin/
 [ -d /snap/bin ] && export PATH=/snap/bin/:$PATH
 [ -d /opt/homebrew/opt/node@18/bin ] && export PATH=/opt/homebrew/opt/node@18/bin/:$PATH
