@@ -154,5 +154,8 @@ fi
 command -v cdl &> /dev/null && alias cdlp='f() { cd "$(cdl -p $1)" };f'
 command -v batcat &> /dev/null && alias bat="batcat"
 
-# Add integration with iTerm2, ensure this is the last line!
+# Add integration with iTerm2, ensure this is the last line to load!
 [ -e $HOME/.iterm2_shell_integration.zsh ] && source $HOME/.iterm2_shell_integration.zsh || true
+
+# The LM Studio app will add this on launch, so leave this line here to stop it from doing so
+# $PATH:/Users/jdcr/.lmstudio/bin
